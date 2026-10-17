@@ -1,0 +1,65 @@
+name: Deploy to GitHub Pages
+
+on:
+  push:
+    branches: [redesign/premium-brand]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+# One deployment at a time; a newer push replaces a pending one.
+concurrency:
+  group: pages
+  cancel-in-progress: true
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 24
+          cache: npm
+      - run: npm ci
+      # A site with holes is not published: this step lists the required facts still missing from
+      # src/lib/facts.data.ts, in the order to answer them, and stops the deploy while any is missing.
+      - name: Launch check (required facts)
+        run: npm run launch-check
+      - run: npm run lint
+      # Production builds run in launch mode (VITE_PENDING is not set): a missing optional fact leaves no trace.
+      # Base path: the site is served from https://<owner>.github.io/<repo>/ until a custom domain serves it from
+      # the root. Once it does, set the repository variable BASE_PATH to "/" (Settings › Secrets and variables ›
+      # Actions › Variables).
+      - name: Build
+        run: npm run build
+        env:
+          BASE_PATH: ${{ vars.BASE_PATH || format('/{0}/', github.event.repository.name) }}
+      # Single-page app on static hosting: every real route gets its own index.html (served with HTTP 200) and
+      # 404.html answers every other address (HTTP 404), a page hidden for now included. Each entry page carries
+      # its route's own title, description, robots tag, preloads and structured data. There is no route list to
+      # keep here: the script reads the routes from the app (src/lib/site.ts and src/App.tsx).
+      - name: Route entry pages
+        run: npm run static-head
+      # dist/sitemap.xml and the Sitemap line of robots.txt, once site.domain is set; nothing before.
+      - name: Sitemap
+        run: npm run sitemap
+      # The build manifest served its purpose (the preloads of the entry pages): it is not part of the site.
+      - name: Remove the build manifest
+        run: rm -rf dist/.vite
+      - uses: actions/upload-pages-artifact@v3
+        with:
+          path: dist
+
+  deploy:
+    needs: build
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - id: deployment
+        uses: actions/deploy-pages@v4

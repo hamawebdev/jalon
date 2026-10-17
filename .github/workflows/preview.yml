@@ -1,0 +1,58 @@
+name: Client preview (GitHub Pages)
+
+# The site for the client to review while the owner's facts are missing: built in review mode, so every missing fact
+# shows its « À compléter » marker, and kept out of search results. It does not run the launch check.
+# For the real launch, disable this workflow (Actions › Client preview › Disable workflow) and use deploy.yml:
+# both publish to the same GitHub Pages site.
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+# One deployment at a time, shared with deploy.yml; a newer push replaces a pending one.
+concurrency:
+  group: pages
+  cancel-in-progress: true
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    env:
+      # The build and the entry pages must use the same display mode (scripts/static-head.mjs).
+      VITE_PENDING: review
+      BASE_PATH: ${{ vars.BASE_PATH || format('/{0}/', github.event.repository.name) }}
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 24
+          cache: npm
+      - run: npm ci
+      - run: npm run lint
+      - name: Build
+        run: npm run build
+      - name: Route entry pages
+        run: npm run static-head
+      - name: Keep the preview out of search results
+        run: node scripts/preview-noindex.mjs
+      - name: Remove the build manifest
+        run: rm -rf dist/.vite
+      - uses: actions/upload-pages-artifact@v3
+        with:
+          path: dist
+
+  deploy:
+    needs: build
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - id: deployment
+        uses: actions/deploy-pages@v4
