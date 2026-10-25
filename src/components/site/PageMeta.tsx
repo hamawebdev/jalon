@@ -1,17 +1,16 @@
-// Keeps <title>, meta description, canonical, hreflang alternates and <html lang> in step with the route in the
-// browser. The built entry pages carry the same head from the start (scripts/static-head.mjs). Owner: seo.
+// Keeps the page's <head> (title, description, canonical, hreflang alternates, Open Graph / Twitter tags, JSON-LD)
+// and <html lang> in step with the route in the browser. Prerendered pages carry the same head from the start
+// (src/entry-server.tsx, scripts/prerender.mjs): both come from buildHead() in ./seo/head.ts. Owner: seo.
 import { useEffect } from 'react'
 import { useLang, useT } from '@/i18n/context'
-import { LOCALES } from '@/i18n/locales'
-import type { PageId } from '@/i18n/routes'
+import { applyHead } from './seo/apply'
+import { buildHead, type MetaPageId } from './seo/head'
 
-export function PageMeta({ page }: { page: PageId | 'notFound' }) {
+export function PageMeta({ page }: { page: MetaPageId }) {
   const t = useT()
   const lang = useLang()
   useEffect(() => {
-    const meta = t.meta.pages[page]
-    document.title = meta.title
-    document.documentElement.lang = LOCALES[lang].htmlLang
+    applyHead(buildHead(page, lang, t))
   }, [t, lang, page])
   return null
 }

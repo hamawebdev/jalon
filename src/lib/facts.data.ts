@@ -85,6 +85,7 @@ export const FACTS: Facts = {
       downloaderCode: '822648',
       url: 'https://atlaspro.io/download/64/android-smartphones-tablettes-box-andoid-firestick-android-tv/2269/atlaspro-ontv-4-0.apk',
       activation: ['code'],
+      compatibleVersions: ['4.0.1'],
       status: 'latest',
     },
     max: {
@@ -108,7 +109,8 @@ export const FACTS: Facts = {
       version: null,
       downloaderCode: '4858164',
       url: 'https://atlaspro.io/download/64/android-smartphones-tablettes-box-andoid-firestick-android-tv/2319/atlaspro-9x-new.apk',
-      activation: ['login', 'code'],
+      // The brief's later lists (Fire TV guide, FAQ 8) say login only; its first app matrix also says code.
+      activation: ['login'],
       status: 'new',
     },
     prime: {

@@ -1,9 +1,9 @@
 name: Client preview (GitHub Pages)
 
-# The site for the client to review while the owner's facts are missing: built in review mode, so every missing fact
-# shows its « À compléter » marker, and kept out of search results. It does not run the launch check.
-# For the real launch, disable this workflow (Actions › Client preview › Disable workflow) and use deploy.yml:
-# both publish to the same GitHub Pages site.
+# The site for the client to review while facts and translations are still coming in: built in review mode, so every
+# missing fact shows its « À compléter » marker, and kept out of search results (noindex on every page). It does not
+# run the launch check. For the real launch, disable this workflow (Actions › Client preview › Disable workflow) and
+# run deploy.yml: both publish to the same GitHub Pages site.
 
 on:
   push:
@@ -24,7 +24,7 @@ jobs:
   build:
     runs-on: ubuntu-latest
     env:
-      # The build and the entry pages must use the same display mode (scripts/static-head.mjs).
+      # Review mode for the client build and the prerender alike (they must match, or hydration breaks).
       VITE_PENDING: review
       BASE_PATH: ${{ vars.BASE_PATH || format('/{0}/', github.event.repository.name) }}
     steps:
@@ -35,14 +35,12 @@ jobs:
           cache: npm
       - run: npm ci
       - run: npm run lint
+      # Type-check, client build, prerender of every page in every language (+ 404.html), sitemap.
       - name: Build
         run: npm run build
-      - name: Route entry pages
-        run: npm run static-head
+      # noindex, nofollow on every prerendered page and on 404.html.
       - name: Keep the preview out of search results
         run: node scripts/preview-noindex.mjs
-      - name: Remove the build manifest
-        run: rm -rf dist/.vite
       - uses: actions/upload-pages-artifact@v3
         with:
           path: dist

@@ -1,8 +1,9 @@
-// Keeps the client preview out of search results: every HTML page of dist/ gets noindex, nofollow.
-//   node scripts/preview-noindex.mjs        after npm run build and npm run static-head (preview workflow only)
-// The served <meta name="robots"> covers crawlers that read the HTML as served. The browser rewrites that tag on
-// every route (page-meta.ts applyMeta), so googlebot and bingbot, which it never touches, carry the same rule for
-// the crawlers that render pages. Never run this for the real launch: .github/workflows/deploy.yml does not.
+// Keeps the client preview out of search results: every HTML page of dist/ (each prerendered page in every
+// language, and 404.html) gets noindex, nofollow for robots, googlebot and bingbot.
+//   node scripts/preview-noindex.mjs        after npm run build (.github/workflows/preview.yml only)
+// Each page's own robots tag is removed first. These tags carry no data-seo attribute, so the browser never
+// replaces them on client-side navigation (src/components/site/seo/apply.ts drops the page's robots tag when
+// they are there). Never run this for the real launch: .github/workflows/deploy.yml does not.
 import { readdir, readFile, writeFile } from 'node:fs/promises'
 import { join } from 'node:path'
 
@@ -22,7 +23,7 @@ async function htmlFiles(dir) {
 const files = await htmlFiles(DIST)
 for (const file of files) {
   const html = await readFile(file, 'utf8')
-  // Drop the tags a route already has (the order page and 404.html carry robots noindex), then add the three.
+  // Drop the robots tags the page already has (every page has one), then add the three.
   const cleaned = html.replace(/\s*<meta name="(?:robots|googlebot|bingbot)"[^>]*>/g, '')
   if (!cleaned.includes('</head>')) throw new Error(`${file}: no </head>`)
   await writeFile(file, cleaned.replace('</head>', `    ${TAGS.join('\n    ')}\n  </head>`))

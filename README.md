@@ -1,123 +1,118 @@
-# Jalon · abonnement TV
+# Atlas Pro · atlasprotvofficial.com
 
-The website of **Jalon**, a French TV subscription service: plans and prices, the plan pages, the apps and setup
-guides per device, help, contact, the order page and the legal pages. All copy is in French (fr-FR).
+The website of **AtlasProTVOfficial**, Distributeur Officiel Agréé of the **Atlas Pro ONTV** IPTV subscription
+(atlasprotvofficial.com): the home page (offer, apps, pricing, installation hub, reviews, FAQ), the Boutique
+(1-click order configurator), the reseller page, the Télécharger hub (official apps and players by system), contact
+and the legal pages.
 
-Built with Vite, React 19, TypeScript, Tailwind CSS v4 and React Router. It is a single-page app with a local cart
-and a front-end order page: nothing is charged on the site.
+Nothing is paid on the site. Every buy, activate and renew button opens WhatsApp with a pre-filled French message
+(`src/lib/whatsapp.ts`); payment (PayPal, SEPA bank transfer) is arranged there.
+
+Built with Vite, React 19, TypeScript, Tailwind CSS v4 and React Router. Every page is **prerendered** to static
+HTML at build time (body and head) and hydrated in the browser, then works as a single-page app.
+
+## Languages
+
+French is the default and lives at the root; six translations live under their prefix, with localised slugs:
+
+| | Prefix | Example |
+|---|---|---|
+| Français | `/` | `/boutique/` |
+| English | `/en/` | `/en/shop/` |
+| Deutsch | `/de/` | `/de/shop/` |
+| Español | `/es/` | `/es/tienda/` |
+| Português | `/pt/` | `/pt/loja/` |
+| Italiano | `/it/` | `/it/negozio/` |
+| Suomi | `/fi/` | `/fi/kauppa/` |
+
+Languages are in `src/i18n/locales.ts`, pages and slugs in `src/i18n/routes.ts` (build every link with `pathFor()`).
+Copy lives in dictionaries: `src/i18n/dict/fr/<area>.ts` is the source, `src/i18n/dict/<lang>/` the translations,
+with exactly the same keys. An area not translated yet borrows the French one. Titles and meta descriptions are the
+`meta` area (`src/i18n/dict/fr/meta.ts`).
 
 ## Scripts
 
 | Command | What it does |
 |---|---|
-| `npm install` | Install the dependencies. |
-| `npm run dev` | Start the dev server (http://localhost:5173/), in review mode: every missing fact shows its marker. |
+| `npm install` | Install the dependencies (Node 24). |
+| `npm run dev` | Dev server (http://localhost:5173/), in review mode: every missing fact shows its « À compléter » marker. No prerender. |
+| `npm run build` | The complete site in `dist/`, in launch mode: type-check, client build, server build and prerender of every page in every language plus `404.html`, `sitemap.xml` and the `Sitemap` line of `robots.txt`. |
+| `npm run preview` | Serve `dist/` locally (http://localhost:4173/). |
 | `npm run launch-check` | List the required facts still missing from `src/lib/facts.data.ts`. Fails while one is missing. |
-| `npm run build` | Type-check and build the site into `dist/`, in launch mode. |
-| `npm run static-head` | After a build: write one entry page per route into `dist/`, each with its own `<head>`. |
-| `npm run sitemap` | After the entry pages: write `dist/sitemap.xml` and the `Sitemap` line of `dist/robots.txt`, once the domain is set. |
-| `npm run preview` | Serve the built site locally. |
+| `npm run check-site` | After a build: check the built pages against the client's content rules (no Arabic, no platform names, no 4K for live TV, WhatsApp links, complete translations). |
 | `npm run lint` | Lint with oxlint. |
-| `npm run icons` | Regenerate the icon font subset after adding an icon (`npm run icons:check` only checks it; the build runs the check). |
+| `npm run prerender` / `npm run sitemap` | The last two steps of `npm run build`, on their own (after `vite build`). |
+| `node scripts/og-image.mjs` | Regenerate the social image `public/og.png` from `scripts/og-image.html` (needs google-chrome). |
 
-`BASE_PATH` sets the base path at build time (`/` by default; the GitHub Pages workflow builds under `/<repo>/`).
+Two environment variables, read at build time:
+
+- `BASE_PATH`: the base path the site is served from (`/` by default; the GitHub Pages workflows use `/<repo>/`
+  until the custom domain serves the site).
+- `VITE_PENDING`: display mode of missing facts, `review` or `launch` (default: `review` on the dev server, `launch`
+  for `npm run build`). The whole build — client and prerender — reads the same value; never mix them.
+
+## How the build works
+
+`npm run build` = `tsc -b && vite build && node scripts/prerender.mjs && node scripts/sitemap.mjs`.
+
+1. **Client build** (`vite build`): the browser bundle in `dist/`, with a build manifest (`dist/.vite/`).
+2. **Prerender** (`scripts/prerender.mjs`): builds `src/entry-server.tsx` for Node (`vite build --ssr`), then renders
+   each page in each language with React's `prerenderToNodeStream` (it waits for the lazy pages) and writes it to
+   `dist/<path>/index.html`:
+   - the page's HTML inside `<div id="root" data-path="…">`, which `src/main.tsx` **hydrates**;
+   - its head, from `buildHead()` in `src/components/site/seo/head.ts`: title, description, canonical, `hreflang`
+     alternates for the 7 languages and `x-default` (French), Open Graph and Twitter tags, `og:locale` and its
+     alternates, and JSON-LD (Organization, WebSite, Product with the three offers on home and Boutique,
+     BreadcrumbList elsewhere; no rating or review block, the reviews are not verified);
+   - `<html lang>`, the display mode, font preloads and `modulepreload` links for the page's chunk and its
+     language's dictionary.
+
+   `404.html` (French « page introuvable », `noindex`) answers every other address; the browser renders it again
+   in the language of the address. The manifest and the server build are removed at the end.
+3. **Sitemap** (`scripts/sitemap.mjs`): `dist/sitemap.xml` with every indexable page in every language, each with
+   its `xhtml:link` hreflang alternates, and the `Sitemap:` line of `dist/robots.txt`.
+
+Canonical URLs, hreflang, `og:image`, structured data and the sitemap always use the client's domain
+(`brand.domain` in `src/lib/facts.data.ts`) at the root, even when a preview is served from `/<repo>/`. In the
+browser, `<PageMeta page="…" />` (one per page) applies the same head on every client-side navigation.
+
+Components must render the same on the server and in the browser: no `window`, `document`, `localStorage`,
+`Math.random()` or `Date.now()` during render — only in effects and event handlers. Errors during the prerender are
+printed by `npm run build` with the page they happened on.
+
+## Facts
+
+Business facts — prices, counts, app versions, Downloader codes, links, the WhatsApp number, the domain — live in
+**`src/lib/facts.data.ts`** and nowhere else (types and the list of required facts in `src/lib/facts.ts`). A fact the
+client has not given is `null`: the review site shows « À compléter » in its place, the launched site leaves the item
+out. Never type a value the client has not given.
 
 ## Going live
 
-The site shows only what the owner has stated. Going live is filling in the facts, then letting the workflow publish.
-
-1. **Fill in `src/lib/facts.data.ts`.** It is the one file to edit, and it holds values only: each line says what to
-   type. The facts marked `★ REQUIRED` are the ones the site cannot go live without (offer and prices, how to
-   order and pay, contact, the company's legal identity, the legally required terms). Leave `null` where you are
-   not sure: never keep a template value.
-2. **Run `npm run launch-check`.** It lists the required facts still missing, in the order to answer them, and
-   where each one shows on the site. It exits with an error while one is missing, and with success once none is.
-3. **Look at the site in both display modes** (`VITE_PENDING`, read once by the brand kit):
-
-   | Mode | How | A missing required fact | A missing optional fact |
-   |---|---|---|---|
-   | review | `npm run dev` (the default there), or `VITE_PENDING=review` | « À compléter » marker | « À compléter » marker |
-   | launch | `npm run build` (the default there), or `VITE_PENDING=launch npm run dev` | « À compléter » marker | leaves no trace: its row, sentence, card or section is not shown |
-
-   In launch mode an unanswered yes/no fact counts as « no »: the reseller page, the trial, the announcements
-   channel and the like stay off the site, with every link to them, until the answer is yes.
-4. **Push.** The workflow (`.github/workflows/deploy.yml`) then does, in this order:
-   - `npm run launch-check`: the deploy stops here while a required fact is missing, so a site with holes is never
-     published;
-   - `npm run lint` and `npm run build` (launch mode);
-   - `npm run static-head` and `npm run sitemap` (see « Deploying »);
-   - the upload to GitHub Pages.
-5. **With a custom domain**, also:
-   - set `site.domain` in `src/lib/facts.data.ts` (a required fact): canonical URLs, absolute preview images,
-     structured data and the sitemap all wait for it;
-   - set the repository variable `BASE_PATH` to `/` (Settings › Secrets and variables › Actions › Variables),
-     because the site is then served from the domain root and no longer from `/<repo>/`.
-
-To try the whole chain on your machine: `npm run launch-check && npm run build && npm run static-head && npm run sitemap`,
-then `npm run preview`.
-
-**Client preview, until the launch.** Every push to `main` runs `.github/workflows/preview.yml`, which publishes the
-site to the same GitHub Pages address in review mode (every missing fact shows its marker) without the launch check,
-and with `noindex, nofollow` on every page (`scripts/preview-noindex.mjs`). The deploy above runs on pushes to
-`redesign/premium-brand`. For the real launch, disable the preview workflow first (Actions › Client preview ›
-Disable workflow), or it replaces the launched site at the next push to `main`.
-
-## Deploying
-
-The site is a single-page app on a static host. After `npm run build`, two scripts finish the job on `dist/`.
-Deploying somewhere else than GitHub Pages? Run the same two commands after the build.
-
-**`npm run static-head`** (`scripts/static-head.mjs`) writes one `index.html` per route, so each address answers
-with HTTP 200, and `404.html` for every other address. Each entry page is the built `index.html` with that route's
-own `<head>`:
-
-- its title, description and social tags, and `noindex` on the order page and on `404.html`. Link previews
-  (WhatsApp, Facebook, X) and many crawlers read the served HTML and never run the app;
-- one `modulepreload` link per script the route's page needs, read from Vite's build manifest, so the page's code
-  downloads with the entry scripts instead of after them;
-- once `site.domain` is set: the canonical URL, the absolute preview image URL and the page's structured data
-  (JSON-LD). A block is written only from real, complete facts: the site name on the home page, the company once
-  its legal name exists, the breadcrumb of the plan pages, a plan's price once it exists, and on `/aide/` the
-  questions whose answer has no missing fact. No rating or review block without a sourced rating.
-
-There is no route list to maintain: the script reads the routes, titles and descriptions from the app itself
-(`PAGE_META` in `src/lib/site.ts` and the plan pages), and each route's page from the `<Route>` lines of
-`src/App.tsx`. A new route needs its `<Route>` there and its title and description in `PAGE_META`, nothing else. A
-page hidden until the owner says yes (the reseller page, `/revendeur/`) gets no entry page, so its address answers
-with the 404 page and HTTP 404. The script can run again on the same folder; `--dist <folder>` points it at another
-build.
-
-**`npm run sitemap`** (`scripts/sitemap.mjs`) writes `dist/sitemap.xml` from the same route list, without the
-`noindex` pages and the hidden pages, each at its canonical address, and adds the `Sitemap:` line to
-`dist/robots.txt`. Both wait for `site.domain`: without it there is no sitemap and no `Sitemap:` line.
-
-**`robots.txt`** (`public/robots.txt`) allows every page. The order page is not disallowed there on purpose: it is
-kept out of search results by the `noindex` in its own HTML, which a crawler must be allowed to read. Crawlers only
-read `robots.txt` at the root of a host: under `https://<owner>.github.io/<repo>/` it is ignored, so it starts
-working with the custom domain. Until then the `noindex` in the served HTML is the only control.
-
-Both scripts follow `VITE_PENDING` like the build does: run all three with the same value (unset in the workflow,
-so launch mode).
+1. **Fill in `src/lib/facts.data.ts`** with the client's answers, then run `npm run launch-check` until it passes.
+2. **Check the build**: `npm run build && npm run check-site`, then `npm run preview` and look at the pages in both
+   display modes (`VITE_PENDING=review npm run build` shows the markers).
+3. **Client preview, until the launch.** Every push to `main` runs `.github/workflows/preview.yml`: review mode, no
+   launch check, `noindex, nofollow` on every page (`scripts/preview-noindex.mjs`), published to GitHub Pages.
+4. **Launch.** Disable the preview workflow (Actions › Client preview › Disable workflow), then run
+   `.github/workflows/deploy.yml` by hand (Actions › Launch deploy › Run workflow). It runs the launch check (and
+   stops while a required fact is missing), lint, `npm run build` in launch mode and `npm run check-site`, then
+   publishes `dist/`.
+5. **Custom domain.** Point atlasprotvofficial.com at GitHub Pages (Settings › Pages › Custom domain) and set the
+   repository variable `BASE_PATH` to `/` (Settings › Secrets and variables › Actions › Variables), so the site is
+   built for the domain root. `robots.txt` and the sitemap only work at the root of the domain.
 
 ## Where things live
 
 | Path | What |
 |---|---|
-| `src/lib/facts.data.ts` | The owner's facts, values only: plans, prices, delivery, support, company and legal details. A fact not given yet is `null`. Never put an invented value here. |
-| `src/lib/facts.ts` | The types, the list of required facts (`REQUIRED_FACTS`) and the helpers that format facts. It re-exports `FACTS`. |
-| `src/components/brand/` | The Jalon brand kit: tokens in use, the wordmark, buttons, cards, the `Pending` marker, the display mode (`mode.ts`) and the scope helpers that decide what a missing fact hides (`FactScope`, `scope.ts`), `identity.ts` (name forms and `pageTitle()`). |
-| `src/components/site/` | The site chrome: header, mobile menu, cart drawer, footer, the WhatsApp button, per-route title and description (`page-meta.ts`), structured data (`structured-data.ts`) and what the entry pages are made of (`static-head.ts`, build time only). |
-| `src/lib/site.ts` | Navigation, contact links and the route → title and description map. |
-| `src/pages/` | One component per route (`App.tsx` lists them) and the sections of each page. |
-| `scripts/` | `launch-check.mjs`, `static-head.mjs`, `sitemap.mjs` and `subset-icons.mjs`. |
-| `public/` | Favicon, app icons, web manifest, `robots.txt` and the social preview image (`og.png`). |
-| `.team/` | The rebrand team's workspace: identity (`brand/`), page inventory (`structure/`), copy and facts sheet (`copy/`), builders' and QA notes, task board. Not part of the site. |
-
-## Facts and placeholders
-
-Facts come from the owner only. Until a fact is given, the review site shows « À compléter · … » in its place
-(`<Pending>` in JSX, `pendingText()` in titles, meta and aria-labels). On the published site (launch mode) only a
-required fact keeps that marker, and the deploy refuses to publish while one is missing; an optional fact leaves
-no trace, and nothing replaces it with a guess. Sections that only exist with a fact (trial, reviews, ratings,
-multi-screen options…) stay hidden in both modes. Fill `src/lib/facts.data.ts` and the site updates everywhere at
-once. `.team/copy/FACTS.md` says where each fact is used.
+| `src/lib/facts.data.ts`, `src/lib/facts.ts` | The client's facts, their types, the launch check list. |
+| `src/lib/whatsapp.ts` | Every WhatsApp link and pre-filled message. |
+| `src/i18n/` | Languages, routes and slugs, dictionaries (`dict/<lang>/`), formatting of numbers and prices. |
+| `src/App.tsx`, `src/pages/` | The routes and one component per page; home sections in `src/pages/home/`. |
+| `src/components/kit/` | Shared building blocks (buttons, sections, cards, `Pending`, `Reveal`). |
+| `src/components/site/` | The frame (header, footer, trust banner, language switcher) and `PageMeta`; the head and structured data in `seo/`. |
+| `src/main.tsx`, `src/entry-server.tsx` | Browser entry (hydration) and server entry (prerender). |
+| `scripts/` | `prerender.mjs`, `sitemap.mjs`, `preview-noindex.mjs`, `launch-check.mjs`, `check-site.mjs`, `og-image.mjs`. |
+| `public/` | Favicon, app icons, web manifest, `robots.txt`, the social image `og.png`, review screenshots. |
+| `docs/` | The client's brief (the spec). |

@@ -35,6 +35,8 @@ interface CommonProps {
   icon?: ReactNode
   /** Trailing arrow that moves on hover. Default: on, except for ghost buttons. */
   arrow?: boolean
+  /** Let a long label wrap onto two lines instead of being cut (phones). */
+  wrap?: boolean
   className?: string
   children: ReactNode
 }
@@ -46,20 +48,22 @@ type PillButtonProps = CommonProps &
     | ({ to?: never; href?: never } & Omit<ComponentProps<'button'>, 'className' | 'children'>)
   )
 
-export function pillClasses(variant: PillVariant = 'primary', size: PillSize = 'md', className?: string) {
+export function pillClasses(variant: PillVariant = 'primary', size: PillSize = 'md', className?: string, wrap = false) {
   return cn(
-    'group/pill inline-flex shrink-0 items-center justify-center whitespace-nowrap rounded-full font-semibold transition-all duration-200 active:scale-[0.98] disabled:pointer-events-none disabled:opacity-50',
+    'group/pill inline-flex shrink-0 items-center justify-center rounded-full',
+    wrap ? 'h-auto min-h-11 whitespace-normal py-2.5 text-center leading-snug' : 'whitespace-nowrap',
+    ' font-semibold transition-all duration-200 active:scale-[0.98] disabled:pointer-events-none disabled:opacity-50',
     VARIANTS[variant],
     SIZES[size],
     className,
   )
 }
 
-function Inner({ icon, arrow, children }: Pick<CommonProps, 'icon' | 'arrow' | 'children'>) {
+function Inner({ icon, arrow, wrap, children }: Pick<CommonProps, 'icon' | 'arrow' | 'wrap' | 'children'>) {
   return (
     <>
       {icon ? <span className="inline-flex shrink-0 [&_svg]:size-[1.15em]">{icon}</span> : null}
-      <span className="truncate">{children}</span>
+      <span className={wrap ? undefined : 'truncate'}>{children}</span>
       {arrow ? (
         <ArrowRight
           aria-hidden
@@ -71,11 +75,12 @@ function Inner({ icon, arrow, children }: Pick<CommonProps, 'icon' | 'arrow' | '
 }
 
 export function PillButton(props: PillButtonProps) {
-  const { variant = 'primary', size = 'md', icon, arrow, className, children, ...rest } = props
+  const { variant = 'primary', size = 'md', icon, arrow, wrap = false, className, children, ...rest } = props
   const showArrow = arrow ?? variant !== 'ghost'
-  const classes = pillClasses(variant, size, className)
+  // Size classes come before `className`, so a wrapping pill keeps its padding but drops the fixed height.
+  const classes = pillClasses(variant, size, cn(className), wrap)
   const inner = (
-    <Inner icon={icon} arrow={showArrow}>
+    <Inner icon={icon} arrow={showArrow} wrap={wrap}>
       {children}
     </Inner>
   )

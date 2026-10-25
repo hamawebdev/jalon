@@ -38,7 +38,7 @@ export function Section({
 export function Badge({ className, children, tone = 'primary' }: { className?: string; children: ReactNode; tone?: 'primary' | 'status' | 'gold' | 'white' }) {
   const tones = {
     primary: 'bg-primary-soft text-primary',
-    status: 'bg-status-soft text-[#00a35c]',
+    status: 'bg-status-soft text-status-deep',
     gold: 'bg-gold text-ink',
     white: 'bg-white/15 text-white',
   }
@@ -64,13 +64,14 @@ const BRAND_PHRASES = ['Atlas Pro ONTV', 'Atlas Pro ON TV', 'Atlaspro ONTV', 'IP
  */
 export function Highlight({ text, extra = [], className }: { text: string; extra?: string[]; className?: string }) {
   const phrases = [...extra, ...BRAND_PHRASES].filter(Boolean).sort((a, b) => b.length - a.length)
-  const pattern = new RegExp(`(${phrases.map((p) => p.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')).join('|')})`, 'g')
+  const pattern = new RegExp(`(${phrases.map((p) => p.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')).join('|')})`, 'gi')
   const parts = text.split(pattern)
+  const lower = phrases.map((p) => p.toLowerCase())
   return (
     <>
       {parts.map((part, i) =>
-        phrases.includes(part) ? (
-          <span key={i} className={cn('text-primary', className)}>
+        lower.includes(part.toLowerCase()) ? (
+          <span key={i} className={cn('whitespace-nowrap text-primary', className)}>
             {part}
           </span>
         ) : (

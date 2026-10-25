@@ -1,5 +1,4 @@
-# Every page may be crawled. The order page (/commande/) is kept out of search results by the noindex tag in its
-# own HTML: a Disallow here would stop crawlers from reading that tag.
-# The Sitemap line is added at deploy time (scripts/sitemap.mjs), once the site's domain is set.
+# Every page may be crawled. The 404 page is kept out of search results by the noindex tag in its own HTML.
+# The Sitemap line is added at build time (scripts/sitemap.mjs), from the domain in src/lib/facts.data.ts.
 User-agent: *
 Allow: /

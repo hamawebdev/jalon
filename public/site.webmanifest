@@ -1,12 +1,12 @@
 {
-  "name": "Jalon · abonnement TV",
-  "short_name": "Jalon",
+  "name": "Atlas Pro · AtlasProTVOfficial",
+  "short_name": "Atlas Pro",
   "lang": "fr-FR",
   "start_url": ".",
   "scope": ".",
   "display": "browser",
-  "theme_color": "#0B1F3F",
-  "background_color": "#E6F0F4",
+  "theme_color": "#5034FF",
+  "background_color": "#FFFFFF",
   "icons": [
     { "src": "icon-192.png", "sizes": "192x192", "type": "image/png", "purpose": "any" },
     { "src": "icon-512.png", "sizes": "512x512", "type": "image/png", "purpose": "any" },

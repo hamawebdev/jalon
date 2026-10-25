@@ -1,8 +1,10 @@
-name: Deploy to GitHub Pages
+name: Launch deploy (GitHub Pages)
+
+# The real launch: builds the site in launch mode (a missing optional fact leaves no trace) and publishes it, indexable.
+# Run it by hand (Actions › Launch deploy › Run workflow) once the client's facts are in and the preview is approved;
+# disable « Client preview » first, or its next run replaces the launched site (both publish to the same Pages site).
 
 on:
-  push:
-    branches: [redesign/premium-brand]
   workflow_dispatch:
 
 permissions:
@@ -10,7 +12,7 @@ permissions:
   pages: write
   id-token: write
 
-# One deployment at a time; a newer push replaces a pending one.
+# One deployment at a time, shared with preview.yml; a newer run replaces a pending one.
 concurrency:
   group: pages
   cancel-in-progress: true
@@ -18,6 +20,13 @@ concurrency:
 jobs:
   build:
     runs-on: ubuntu-latest
+    env:
+      # Served from https://<owner>.github.io/<repo>/ until the custom domain (atlasprotvofficial.com) serves the site
+      # from the root: then set the repository variable BASE_PATH to "/" (Settings › Secrets and variables › Actions
+      # › Variables). Canonical URLs, hreflang, og:image and the sitemap always use the domain of src/lib/facts.data.ts.
+      BASE_PATH: ${{ vars.BASE_PATH || format('/{0}/', github.event.repository.name) }}
+      # Launch mode for the client build and the prerender alike (they must match, or hydration breaks).
+      VITE_PENDING: launch
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-node@v4
@@ -25,31 +34,19 @@ jobs:
           node-version: 24
           cache: npm
       - run: npm ci
-      # A site with holes is not published: this step lists the required facts still missing from
-      # src/lib/facts.data.ts, in the order to answer them, and stops the deploy while any is missing.
+      # A site with holes is not published: lists the required facts still missing from src/lib/facts.data.ts and
+      # stops the deploy while any is missing.
       - name: Launch check (required facts)
         run: npm run launch-check
       - run: npm run lint
-      # Production builds run in launch mode (VITE_PENDING is not set): a missing optional fact leaves no trace.
-      # Base path: the site is served from https://<owner>.github.io/<repo>/ until a custom domain serves it from
-      # the root. Once it does, set the repository variable BASE_PATH to "/" (Settings › Secrets and variables ›
-      # Actions › Variables).
+      # Type-check, client build, server build, prerender of every page in every language (+ 404.html), sitemap.xml
+      # and the Sitemap line of robots.txt: dist/ is the complete site.
       - name: Build
         run: npm run build
-        env:
-          BASE_PATH: ${{ vars.BASE_PATH || format('/{0}/', github.event.repository.name) }}
-      # Single-page app on static hosting: every real route gets its own index.html (served with HTTP 200) and
-      # 404.html answers every other address (HTTP 404), a page hidden for now included. Each entry page carries
-      # its route's own title, description, robots tag, preloads and structured data. There is no route list to
-      # keep here: the script reads the routes from the app (src/lib/site.ts and src/App.tsx).
-      - name: Route entry pages
-        run: npm run static-head
-      # dist/sitemap.xml and the Sitemap line of robots.txt, once site.domain is set; nothing before.
-      - name: Sitemap
-        run: npm run sitemap
-      # The build manifest served its purpose (the preloads of the entry pages): it is not part of the site.
-      - name: Remove the build manifest
-        run: rm -rf dist/.vite
+      # The client's content rules, checked on the built pages (no Arabic, no platform names, no 4K for live TV,
+      # WhatsApp links, translations complete).
+      - name: Content check
+        run: npm run check-site
       - uses: actions/upload-pages-artifact@v3
         with:
           path: dist

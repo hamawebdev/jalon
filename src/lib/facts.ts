@@ -25,6 +25,8 @@ export interface App {
   downloaderCode: string | null
   url: string | null
   activation: Activation[]
+  /** Other versions the brief lists as the same official edition (« Version 4.0.2 – version 4.0.1 »). */
+  compatibleVersions?: string[]
   status: 'latest' | 'new' | 'previous'
 }
 
