@@ -24,14 +24,22 @@ export function CodeBox({ code, compact = false, className }: { code: string; co
   return (
     <div
       className={cn(
-        'flex items-center gap-3 rounded-2xl border border-dashed border-primary/35 bg-primary-soft/60',
+        // Container query: in narrow cards (3-column grid at 1024 px) the code is smaller and the copy button goes
+        // under it, rather than letting a 7-digit code overflow the box.
+        '@container flex flex-wrap items-center gap-x-3 gap-y-2 rounded-2xl border border-dashed border-primary/35 bg-primary-soft/60',
         compact ? 'px-3 py-2' : 'px-4 py-3',
         className,
       )}
     >
-      <div className="min-w-0 flex-1">
-        <p className="text-[11px] font-bold uppercase tracking-wider text-primary">{t.codeLabel}</p>
-        <p className={cn('font-mono font-bold tracking-[0.18em] text-ink tabular-nums', compact ? 'text-lg' : 'text-2xl')}>
+      {/* Narrow box (3-column grid at 1024 px): the copy button always goes under the code, so every card looks alike. */}
+      <div className="w-full @[17rem]:w-auto @[17rem]:flex-1">
+        <p className="text-[11px] font-bold whitespace-nowrap uppercase tracking-wider text-primary">{t.codeLabel}</p>
+        <p
+          className={cn(
+            'font-mono font-bold tracking-[0.12em] text-ink tabular-nums',
+            compact ? 'text-lg' : 'text-xl @[19rem]:text-2xl @[19rem]:tracking-[0.18em]',
+          )}
+        >
           {code}
         </p>
       </div>

@@ -217,7 +217,7 @@ export function OrderConfigurator({
             className="min-w-0"
           >
             <StepLegend letter={c.stepC.letter} title={c.stepC.title} alert={prompted && missing === 'payment'} />
-            <div className="grid grid-cols-2 gap-3">
+            <div className="grid grid-cols-1 gap-3 min-[440px]:grid-cols-2">
               {payments.map((m) => {
                 const Icon = PAYMENT_ICONS[m]
                 return (
@@ -232,7 +232,7 @@ export function OrderConfigurator({
                     <span className="inline-flex size-9 shrink-0 items-center justify-center rounded-xl bg-mist text-primary group-has-checked/opt:bg-primary group-has-checked/opt:text-white">
                       <Icon aria-hidden className="size-4.5" />
                     </span>
-                    <span className="min-w-0">{c.payments[m]}</span>
+                    <span className="min-w-0 break-words hyphens-auto">{c.payments[m]}</span>
                   </Radio>
                 )
               })}

@@ -65,14 +65,14 @@ export function Vod() {
             ))}
           </ul>
 
-          <ul aria-label={v.categoriesLabel} className="mt-8 grid grid-cols-2 gap-3 sm:grid-cols-4">
+          <ul aria-label={v.categoriesLabel} className="mt-8 grid grid-cols-2 gap-3 sm:grid-cols-4 lg:grid-cols-2 xl:grid-cols-4">
             {CATEGORY_ORDER.map((key) => (
               <li
                 key={key}
                 className="rounded-2xl border border-line bg-white px-4 py-3.5 shadow-card transition-all duration-300 hover:-translate-y-0.5 hover:border-primary/30 hover:shadow-glow"
               >
                 <span className="block font-display text-xl font-bold text-primary">{t.fmt.plus(num(FACTS.counts.vodCategories[key]))}</span>
-                <span className="block text-sm font-medium text-slate">{v.categories[key]}</span>
+                <span className="block text-sm font-medium break-words hyphens-auto text-slate">{v.categories[key]}</span>
               </li>
             ))}
           </ul>

@@ -11,7 +11,7 @@ import { useStoryNumbers } from '../story/numbers'
 
 function CardTitle({ children, invert }: { children: string; invert?: boolean }) {
   return (
-    <h3 className={cn('mt-5 text-xl font-bold tracking-tight sm:text-2xl', invert && 'text-white')}>
+    <h3 className={cn('mt-5 text-xl font-bold tracking-tight break-words hyphens-auto sm:text-2xl', invert && 'text-white')}>
       {invert ? children : <Highlight text={children} />}
     </h3>
   )

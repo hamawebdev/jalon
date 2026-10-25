@@ -85,7 +85,8 @@ function PlanCard({ plan }: { plan: Plan }) {
           message={planMessage(plan.id)}
           variant={featured ? 'gold' : 'secondary'}
           size="lg"
-          className="mt-7 w-full"
+          wrap
+          className="mt-7 w-full lg:gap-1.5 lg:px-3 lg:text-[15px] xl:gap-2.5 xl:px-7 xl:text-base"
         >
           {p.cta}
         </WhatsAppButton>

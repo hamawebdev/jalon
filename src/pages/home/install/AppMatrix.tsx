@@ -89,7 +89,7 @@ function AppCard({ id, index }: { id: HubAppId; index: number }) {
 export function AppMatrix() {
   const t = useT().install.apps
   return (
-    <div id={HOME_ANCHORS.apps} className="mt-16 scroll-mt-24 sm:mt-24">
+    <div id={HOME_ANCHORS.apps} className="mt-16 scroll-mt-4 sm:mt-24">
       <div className="mx-auto mb-8 flex max-w-3xl flex-col items-center gap-3 text-center sm:mb-10">
         <Badge>{t.badge}</Badge>
         <h3 className="text-2xl leading-tight font-bold tracking-tight sm:text-3xl">

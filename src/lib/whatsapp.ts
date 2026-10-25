@@ -67,7 +67,7 @@ export function renewalMessage(): string {
   return `${GREETING}, je souhaite renouveler mon Code Atlas Pro pour 12 mois. Mon code ou identifiant actuel : `
 }
 
-/** Hero button « Activer mon Code Atlas Pro Officiel » and other non-plan buy buttons. */
+/** Hero button « Activer mon Code Atlas Pro Officiel », the header WhatsApp button and other non-plan buy buttons. */
 export function activateMessage(): string {
   return `${GREETING}, je souhaite activer mon Code Atlas Pro officiel. Pouvez-vous m'indiquer les forfaits disponibles ?`
 }
@@ -77,7 +77,7 @@ export function helpMessage(): string {
   return `${GREETING}, j'ai besoin d'aide pour installer mon abonnement Atlas Pro sur mon appareil : `
 }
 
-/** Header button, floating button, contact page. */
+/** Floating button, contact page, general questions. */
 export function contactMessage(): string {
   return `${GREETING}, j'ai une question au sujet de mon abonnement Atlas Pro.`
 }

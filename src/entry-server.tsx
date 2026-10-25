@@ -44,6 +44,7 @@ async function streamToString(stream: AsyncIterable<Uint8Array | string>): Promi
  * links React Router writes carry the same base as in the browser.
  */
 export async function render(page: MetaPageId, lang: Lang, path: string, base: string): Promise<Rendered> {
+  // The dictionary is loaded first (no suspension in LangProvider); prerender waits for the lazy page itself.
   const dict = await loadDict(lang)
   // The same basename as BrowserRouter gets in src/main.tsx.
   const basename = base === '/' ? undefined : base
@@ -56,6 +57,9 @@ export async function render(page: MetaPageId, lang: Lang, path: string, base: s
       </StaticRouter>
     </StrictMode>,
     {
+      // Never outline a large Suspense boundary into a hidden block streamed after the page (React does that for
+      // boundaries over ~12 kB by default): the page's HTML must sit in <main>, in document order, without JavaScript.
+      progressiveChunkSize: Number.POSITIVE_INFINITY,
       onError(error) {
         errors.push(error instanceof Error ? `${error.message}\n${error.stack ?? ''}` : String(error))
       },

@@ -9,7 +9,9 @@ import { SiteHeader } from './SiteHeader'
 import { TrustBanner } from './TrustBanner'
 
 function useScrollOnNavigate() {
-  const { pathname, hash } = useLocation()
+  // `key` changes on every navigation, also a click on a link to the page already shown (footer « Boutique » on the
+  // Boutique page, the logo on the home page): that click scrolls back to the top or to the section too.
+  const { pathname, hash, key } = useLocation()
   useEffect(() => {
     if (!hash) {
       window.scrollTo({ top: 0 })
@@ -26,7 +28,7 @@ function useScrollOnNavigate() {
       }
     }, 50)
     return () => window.clearInterval(timer)
-  }, [pathname, hash])
+  }, [pathname, hash, key])
 }
 
 function Frame() {

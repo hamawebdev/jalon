@@ -29,7 +29,7 @@ export function HelpCard({ className }: { className?: string }) {
       <p className="mt-2 text-[15px] text-white/80">
         {typo(t.faq.help.text(num(FACTS.counts.supportMinutes)), lang)}
       </p>
-      <WhatsAppButton message={contactMessage()} className="mt-5 w-full sm:w-auto">
+      <WhatsAppButton message={contactMessage()} wrap className="mt-5 w-full sm:w-auto">
         {t.faq.help.button}
       </WhatsAppButton>
       {FACTS.whatsapp.display ? (

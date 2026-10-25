@@ -155,7 +155,7 @@ export default function Contact() {
                   <Card as={Link} to={item.to} className="group flex h-full flex-col gap-4">
                     <IconTile>{item.icon}</IconTile>
                     <h3 className="flex items-center gap-2 font-display text-lg font-bold">
-                      {item.title}
+                      <span className="min-w-0 break-words hyphens-auto">{item.title}</span>
                       <ArrowRight
                         aria-hidden
                         className="size-4 text-primary transition-transform duration-200 group-hover:translate-x-1"

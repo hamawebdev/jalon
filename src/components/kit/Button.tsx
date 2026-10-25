@@ -50,8 +50,9 @@ type PillButtonProps = CommonProps &
 
 export function pillClasses(variant: PillVariant = 'primary', size: PillSize = 'md', className?: string, wrap = false) {
   return cn(
-    'group/pill inline-flex shrink-0 items-center justify-center rounded-full',
-    wrap ? 'h-auto min-h-11 whitespace-normal py-2.5 text-center leading-snug' : 'whitespace-nowrap',
+    'group/pill inline-flex items-center justify-center rounded-full',
+    // A wrapping pill may also shrink: in a flex row it would otherwise keep its one-line width and overflow.
+    wrap ? 'h-auto min-h-11 max-w-full min-w-0 shrink whitespace-normal py-2.5 text-center leading-snug' : 'shrink-0 whitespace-nowrap',
     ' font-semibold transition-all duration-200 active:scale-[0.98] disabled:pointer-events-none disabled:opacity-50',
     VARIANTS[variant],
     SIZES[size],

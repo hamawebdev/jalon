@@ -86,7 +86,7 @@ export const social: Dict['social'] = {
       customers: (customers: string) => `+${customers}`,
       customersLabel: 'Subscribers Supported & Retained',
       recommend: (percent: string) => `${percent}%`,
-      recommendLabel: 'Recommend Our 7-Day Support',
+      recommendLabel: 'Recommend Our Support (7 Days a Week)',
     },
     stars: 'Rating: 5 out of 5',
     countries: { fr: 'France', be: 'Belgium', ch: 'Switzerland', ca: 'Canada' },

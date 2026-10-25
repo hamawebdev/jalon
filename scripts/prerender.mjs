@@ -73,11 +73,11 @@ function assetsOf(moduleKey) {
   }
 }
 
-/** Each page's source module, read from the lazy imports of src/App.tsx (`home: lazy(() => import('@/pages/Home'))`). */
+/** Each page's source module, read from the page imports of src/App.tsx (`home: lazy(() => import('@/pages/Home'))`). */
 function pageModules() {
   const source = readFileSync(path.join(ROOT, 'src/App.tsx'), 'utf8')
   const modules = {}
-  for (const [, name, spec] of source.matchAll(/(\w+)\s*(?::|=)\s*lazy\(\s*\(\)\s*=>\s*import\(\s*'@\/([^']+)'\s*\)\s*\)/g)) {
+  for (const [, name, spec] of source.matchAll(/(\w+)\s*(?::|=)\s*(?:lazy\(\s*)?\(\)\s*=>\s*import\(\s*'@\/([^']+)'\s*\)/g)) {
     const file = ['.tsx', '.ts', '/index.tsx'].map((ext) => `src/${spec}${ext}`).find((f) => existsSync(path.join(ROOT, f)))
     if (file) modules[name === 'NotFound' ? 'notFound' : name] = file
   }
@@ -131,6 +131,11 @@ for (const route of server.prerenderRoutes()) {
     continue
   }
   for (const error of result.errors) (STRICT ? failures : notes).push(`${label}: ${error.split('\n')[0]}`)
+  // A Suspense boundary written out of order (a hidden block after the page, moved in by a script): the page would be
+  // empty without JavaScript and its headings out of order. src/entry-server.tsx sets progressiveChunkSize to avoid it.
+  if (/<template id="B:|<div hidden id="S:|\$RC\b/.test(result.html)) {
+    failures.push(`${label}: a Suspense boundary was streamed out of order (hidden S:/B: block): the page is empty without JavaScript`)
+  }
 
   const links = [...fonts]
   const page = modules[route.page] ? assetsOf(modules[route.page]) : null

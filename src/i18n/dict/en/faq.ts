@@ -225,13 +225,13 @@ const items: FaqItem[] = [
       {
         cards: [
           [
-            b('Case N°1 — On the official Atlas Pro app (Android / TV Box):'),
+            b('Case No. 1 — On the official Atlas Pro app (Android / TV Box):'),
             ' The messages “Atlas Pro can’t connect to the server” or “playback error” usually appear when you are using an old version of the app, after a temporary bug, or because of incompatibility with an Android system that is too old (our apps are optimised for Google TV televisions, smartphones and TV boxes running a recent Android version). ',
             b('Solution:'),
             ` Try re-entering your details, clear the app's cache in your device settings and then sign in again, or install the latest official update (Atlas Pro ONTV ${v.ontv} or Atlas Pro Max v${v.max}).`,
           ],
           [
-            b('Case N°2 — “Playlist not working” message on IBO Player, Hot Player, Bob Player or IBO Smarter:'),
+            b('Case No. 2 — “Playlist not working” message on IBO Player, Hot Player, Bob Player or IBO Smarter:'),
             ' On these players, this error most often means that the shared server link (URL) needs updating. All you need to do is change the link or refresh the server data. ',
             b('Immediate solution:'),
             ' Simply contact our support team on ',

@@ -55,7 +55,7 @@ function Group({
   children: ReactNode
 }) {
   return (
-    <section id={id} aria-labelledby={`${id}-title`} className="scroll-mt-40 border-t border-line pt-12 first:border-t-0 first:pt-0">
+    <section id={id} aria-labelledby={`${id}-title`} className="scroll-mt-[4.5rem] border-t border-line pt-12 first:border-t-0 first:pt-0">
       <div className="mb-8 flex items-start gap-4 sm:gap-5">
         <IconTile className="hidden size-14 rounded-2xl sm:inline-flex">
           <Icon aria-hidden />

@@ -42,8 +42,8 @@ export function Hero() {
         <Reveal>
           <SectionHeader as="h1" align="left" badge={t.hero.badge} title={t.hero.title} subtitle={t.hero.subtitle} className="mb-8 sm:mb-8" />
           <UseCasePills active={active} onToggle={toggle} />
-          <div className="mt-8 flex flex-col gap-3 sm:flex-row sm:items-center">
-            <WhatsAppButton message={activateMessage()} variant="primary" size="lg" className={WRAP_PILL}>
+          <div className="mt-8 flex flex-col gap-3 sm:flex-row sm:flex-wrap sm:items-center">
+            <WhatsAppButton message={activateMessage()} variant="primary" size="lg" wrap className={WRAP_PILL}>
               {t.hero.cta}
             </WhatsAppButton>
             <PillButton to={homeAnchor('pricing', lang)} variant="ghost" size="lg" arrow>

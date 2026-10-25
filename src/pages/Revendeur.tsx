@@ -64,7 +64,7 @@ function Hero() {
         <ul
           id={PANELS_ID}
           aria-label={t.panels.label}
-          className="mx-auto mt-16 grid max-w-md scroll-mt-28 gap-8 sm:mt-20 lg:max-w-none lg:grid-cols-3 lg:items-stretch lg:gap-6"
+          className="mx-auto mt-16 grid max-w-md scroll-mt-4 gap-8 sm:mt-20 lg:max-w-none lg:grid-cols-3 lg:items-stretch lg:gap-6"
         >
           {FACTS.resellerPanels.map((codes, i) => (
             <li key={codes} className={cn(codes === FACTS.resellerFeaturedPanel && 'lg:z-10')}>
@@ -100,7 +100,7 @@ function WhyPanel() {
               <Gauge />
             </IconTile>
             <div className="relative mt-10">
-              <p className="font-display text-6xl font-extrabold tracking-tight sm:text-7xl">{uptime}</p>
+              <p className="font-display text-6xl font-extrabold tracking-tight whitespace-nowrap sm:text-7xl lg:text-5xl xl:text-6xl">{uptime}</p>
               <h3 className="mt-3 text-xl font-bold text-white sm:text-2xl">{t.items.uptime.title}</h3>
               <p className="mt-2 text-white/80">{t.items.uptime.text}</p>
             </div>

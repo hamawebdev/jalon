@@ -87,7 +87,7 @@ export const install: InstallCopy = {
             { mark: 'no', text: 'A instalação de aplicações externas ou de ficheiros **Atlas Pro ONTV APK** está bloqueada.' },
             {
               mark: 'yes',
-              text: '**Solução recomendada:** opte por um modelo **Fire TV Stick 4K, 4K Max, Lite ou Cube** (com Fire OS) ou por uma box Android TV (Xiaomi, Mecool, Formuler) 100% compatível com o Downloader.',
+              text: '**Solução recomendada:** opte por um **modelo Fire TV Stick 4K, 4K Max, Lite ou Cube** (com Fire OS) ou por uma box Android TV (Xiaomi, Mecool, Formuler) 100% compatível com o Downloader.',
             },
           ],
         },
@@ -230,7 +230,7 @@ export const install: InstallCopy = {
         {
           kind: 'steps',
           steps: [
-            { text: 'Abrir o **MyTVOnline 2 ou 3**.' },
+            { text: 'Abrir **o MyTVOnline 2 ou 3**.' },
             { text: '**Menu > Ligações > Adicionar Portal** (Add Portal).' },
             { text: 'Dar um nome ao portal (**Atlas Pro**).' },
             { text: 'Mudar « **Login Required** » para **ON**.' },

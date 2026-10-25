@@ -108,7 +108,7 @@ export function DeviceHub() {
 
   return (
     <div>
-      <div ref={selectorRef} className="scroll-mt-24 rounded-[2rem] border border-line bg-mist p-3 sm:p-5">
+      <div ref={selectorRef} className="scroll-mt-4 rounded-[2rem] border border-line bg-mist p-3 sm:p-5">
         <div className="flex flex-wrap items-baseline justify-between gap-x-4 gap-y-1 px-2 pt-1 pb-4">
           <h3 className="text-lg font-bold sm:text-xl">{t.selector.title}</h3>
           <p className="text-sm text-slate">{t.selector.hint}</p>
@@ -174,7 +174,7 @@ export function DeviceHub() {
             aria-labelledby={tabId(owner)}
             tabIndex={0}
             hidden={!shown}
-            className="mt-6 scroll-mt-24 rounded-[2rem] border border-line bg-white p-5 shadow-card sm:mt-8 sm:p-8 lg:p-10"
+            className="mt-6 scroll-mt-4 rounded-[2rem] border border-line bg-white p-5 shadow-card sm:mt-8 sm:p-8 lg:p-10"
           >
             <div className="flex flex-col gap-4 border-b border-line pb-6 sm:flex-row sm:items-start sm:justify-between">
               <div className="flex min-w-0 items-start gap-4">

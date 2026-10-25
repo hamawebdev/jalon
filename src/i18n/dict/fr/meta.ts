@@ -54,7 +54,7 @@ const pages: Record<MetaPage, PageMetaCopy> = {
     name: 'Accueil',
     title: 'Atlas Pro ONTV (2026) · Abonnement IPTV Atlas Pro',
     description: (v) =>
-      `Découvrez Atlas Pro ONTV 2026, l'IPTV Atlas Pro on TV : +${v.channels} chaînes en Full HD, +${v.films} films et séries. Abonnement Atlas Pro activé sur WhatsApp.`,
+      `Découvrez Atlas Pro ONTV 2026, l'IPTV Atlas Pro on TV : +${v.channels} chaînes en Full HD, +${v.films} films et +${v.series} séries. Abonnement Atlas Pro activé sur WhatsApp.`,
   },
   boutique: {
     name: 'Boutique',

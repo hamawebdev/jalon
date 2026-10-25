@@ -93,6 +93,8 @@ const VOD_OK = /\bVOD\b|vidéo à la demande|video on demand|films?|séries|seri
 
 const FRENCH_WORDS = /\b(le|la|les|des|du|vous|votre|vos|nous|notre|nos|pour|avec|sur|dans|est|une|un|et|en|au|aux|chaînes|abonnement|appareil|téléchargez|installez|cliquez|à|où|ou|très|plus|sans|selon|chaque|mois|écran|écrans)\b/gi
 const ALLOWED_SAME = new Set() // text nodes allowed to be identical to French (filled below)
+/** Words FRENCH_WORDS would flag that are ordinary words of a translation too (« or »). */
+const SHARED_WORDS = { pt: ['ou'], es: ['o'] }
 
 const routeList = routes.allRoutes()
 const pages = new Map()
@@ -173,7 +175,7 @@ for (const lang of LANGS) {
 // ── 3. Translations: French left over, numbers ───────────────────────────────────────────────────────────────
 const digits = (text) =>
   (text.match(/\d[\d\s.,  ]*\d|\d/g) ?? []).map((n) => n.replace(/[^\d]/g, '')).filter((n) => n.length > 0)
-const brandOnly = /^[\s\d.,:;!?()\[\]«»"'/+\-–—·•|%€$#&*✓✔✦→↑↓➔⬇️🔥]*$|^(Atlas Pro[\w\s.]*|ONTV[\w\s.]*|IBO[\w\s.]*|Max v?7|AtlasProTVOfficial|PayPal|SEPA|WhatsApp|Telegram|Downloader|Xtream Codes|M3U|EPG|VOD|Full HD|H\.265|4K|FHD|HD|SD|Smart TV|Fire TV Stick|Android|Google TV|iOS|Apple TV|iPhone|iPad|Windows|macOS|Linux|Mac|MAG|Formuler[\w\s]*|Nvidia Shield|Samsung|LG|Sony|Philips|TCL|Xiaomi|Mecool)$/i
+const brandOnly = /^[\s\d.,:;!?()[\]«»"'/+\-–—·•|%€$#&*✓✔✦→↑↓➔⬇\u{1F525}]*$|^(Atlas Pro[\w\s.]*|ONTV[\w\s.]*|IBO[\w\s.]*|Max v?7|AtlasProTVOfficial|PayPal|SEPA|WhatsApp|Telegram|Downloader|Xtream Codes|M3U|EPG|VOD|Full HD|H\.265|4K|FHD|HD|SD|Smart TV|Fire TV Stick|Android|Google TV|iOS|Apple TV|iPhone|iPad|Windows|macOS|Linux|Mac|MAG|Formuler[\w\s]*|Nvidia Shield|Samsung|LG|Sony|Philips|TCL|Xiaomi|Mecool)$/iu
 for (const p of routes.PAGES) {
   const fr = pages.get(routes.pathFor(p, 'fr'))
   if (!fr) continue
@@ -186,7 +188,12 @@ for (const p of routes.PAGES) {
     const nodes = textNodes(page.html)
     for (const node of nodes) {
       if (!frNodes.has(node) || brandOnly.test(node) || ALLOWED_SAME.has(node)) continue
-      const frenchHits = (node.match(FRENCH_WORDS) ?? []).length
+      // Short nodes identical to French whose only « French » word is also that language's own (pt « ou », es
+      // « o »: « MyTVOnline 2 ou 3 ») are not leftovers.
+      const shared = SHARED_WORDS[lang] ?? []
+      const hits = node.match(FRENCH_WORDS) ?? []
+      if (node.split(/\s+/).length <= 6 && hits.length && hits.every((w) => shared.includes(w.toLowerCase()))) continue
+      const frenchHits = hits.length
       if (frenchHits >= 2 || (node.split(' ').length >= 3 && frenchHits >= 1)) error('untranslated', page.path, node.slice(0, 140))
     }
     const d = digits(nodes.join(' ')).sort()

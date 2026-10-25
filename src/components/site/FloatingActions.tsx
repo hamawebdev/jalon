@@ -10,6 +10,9 @@ import { useScrolledPast } from './chrome/hooks'
 export function FloatingActions() {
   const t = useT()
   const showTop = useScrolledPast(600)
+  // Phones: the round button would sit on the hero's last chip or button on the first screen, so it slides in once
+  // the reader scrolls (the hero has its own WhatsApp button). From sm it is always there.
+  const showWhatsapp = useScrolledPast(320)
 
   function toTop() {
     const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches
@@ -35,7 +38,10 @@ export function FloatingActions() {
         rel="noopener noreferrer"
         aria-label={t.chrome.floating.whatsapp}
         data-cta="whatsapp"
-        className="pointer-events-auto inline-flex size-14 items-center justify-center rounded-full bg-whatsapp text-white shadow-[0_8px_24px_rgb(37_211_102/0.4)] transition-transform duration-200 hover:scale-105 hover:bg-whatsapp-deep"
+        className={cn(
+          'pointer-events-auto inline-flex size-14 items-center justify-center rounded-full bg-whatsapp text-white shadow-[0_8px_24px_rgb(37_211_102/0.4)] transition-all duration-300 hover:scale-105 hover:bg-whatsapp-deep',
+          !showWhatsapp && 'max-sm:invisible max-sm:translate-y-3 max-sm:opacity-0',
+        )}
       >
         <WhatsAppIcon className="size-7" />
       </a>

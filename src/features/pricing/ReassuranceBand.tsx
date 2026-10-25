@@ -35,7 +35,7 @@ export function ReassuranceBand({ className }: { className?: string }) {
           <h3 className="text-lg font-bold leading-snug">{title}</h3>
           <p className="text-[15px] text-slate">{text}</p>
           {renewal ? (
-            <WhatsAppButton message={renewalMessage()} variant="ghost" size="md" arrow className="-ml-4 mt-auto self-start">
+            <WhatsAppButton message={renewalMessage()} variant="ghost" size="md" arrow wrap className="-ml-4 mt-auto max-w-[calc(100%+1rem)] self-start text-left">
               {r.renewal.cta}
             </WhatsAppButton>
           ) : null}

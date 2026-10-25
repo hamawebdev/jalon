@@ -18,11 +18,11 @@ export function Renewal() {
           <span aria-hidden className="absolute -right-16 -bottom-28 size-80 rounded-full border-[40px] border-white/10" />
           <div className="relative">
             <SectionHeader invert title={r.title} subtitle={r.text} className="mb-10 sm:mb-10" />
-            <div className="mx-auto flex max-w-sm flex-col items-stretch justify-center gap-3 sm:max-w-none sm:flex-row sm:items-center">
-              <WhatsAppButton message={activateMessage()} variant="white" size="lg" className={WRAP_PILL}>
+            <div className="mx-auto flex max-w-sm flex-col items-stretch justify-center gap-3 sm:max-w-none sm:flex-row sm:flex-wrap sm:items-center">
+              <WhatsAppButton message={activateMessage()} variant="white" size="lg" wrap className={WRAP_PILL}>
                 {r.subscribe}
               </WhatsAppButton>
-              <WhatsAppButton message={renewalMessage()} variant="outlineWhite" size="lg" icon={<RefreshCw />} className={WRAP_PILL}>
+              <WhatsAppButton message={renewalMessage()} variant="outlineWhite" size="lg" icon={<RefreshCw />} wrap className={WRAP_PILL}>
                 {r.renew}
               </WhatsAppButton>
             </div>

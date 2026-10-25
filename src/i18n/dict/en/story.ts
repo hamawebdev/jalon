@@ -20,7 +20,7 @@ export const story: Dict['story'] = {
   },
 
   hero: {
-    badge: '✦ THE N°1 ATLAS PRO IPTV IN 2026',
+    badge: '✦ THE #1 ATLAS PRO IPTV IN 2026',
     title: 'Discover Atlas Pro ONTV (2026)',
     subtitle:
       'IPTV Atlas Pro has established itself as the undisputed leader in streaming services. The Atlas Pro subscription remains, as ever, the absolute benchmark for quality, stability and user experience.',
@@ -57,8 +57,8 @@ export const story: Dict['story'] = {
     leader: {
       title: 'IPTV Leader in France & Europe',
       text: (years: string) =>
-        `Recognised for more than ${years} years, Atlas Pro ONTV is the N°1 official provider in France and across the French-speaking world, guaranteeing rock-solid stability for your Atlas Pro subscription.`,
-      stamp: 'N°1',
+        `Recognised for more than ${years} years, Atlas Pro ONTV is the No. 1 official provider in France and across the French-speaking world, guaranteeing rock-solid stability for your Atlas Pro subscription.`,
+      stamp: '#1',
       region: 'France & Europe',
     },
     tech: {
@@ -76,7 +76,7 @@ export const story: Dict['story'] = {
       text: 'The Atlas Pro ONTV app works everywhere: France, Belgium, Switzerland, Canada, the USA and many more. Total precision for your favourite channel packages.',
     },
     support: {
-      title: '7-Day Support & Customer Reviews',
+      title: 'Support 7 Days a Week & Customer Reviews',
       text: (minutes: string) =>
         `Atlas Pro can't connect to the server? Our French-speaking technical team is available 7 days a week on WhatsApp, with a response time of under ${minutes} minutes.`,
       reviews: 'Read our Atlas Pro ONTV Reviews',

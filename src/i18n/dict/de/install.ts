@@ -333,7 +333,7 @@ export const install: InstallCopy = {
       },
       {
         q: 'Brauche ich für mein Atlas Pro Abo ein VPN?',
-        a: '**Nein, das ist nicht nötig** – unsere offiziellen **Atlas Pro ONTV** Zugänge nutzen optimierte Verbindungen, die Sperren durch Internetanbieter umgehen. Wenn Sie dennoch ein VPN verwenden, **wählen Sie unbedingt einen Server in Ihrem eigenen Land** (oder in einem Nachbarland), um die maximale Geschwindigkeit zu behalten und Latenz zu vermeiden.',
+        a: '**Nein, das ist nicht nötig** – unsere offiziellen **Atlas Pro ONTV** Zugänge nutzen optimierte Verbindungen, die Sperren durch Internetanbieter vermeiden. Wenn Sie dennoch ein VPN verwenden, **wählen Sie unbedingt einen Server in Ihrem eigenen Land** (oder in einem Nachbarland), um die maximale Geschwindigkeit zu behalten und Latenz zu vermeiden.',
       },
       {
         q: 'Warum brauche ich auf manchen Geräten einen kostenpflichtigen Player (~{price} / Jahr)?',

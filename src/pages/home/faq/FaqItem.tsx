@@ -24,7 +24,7 @@ export function FaqItem({
     <li
       id={base}
       className={cn(
-        'scroll-mt-28 rounded-3xl border transition-[background-color,border-color,box-shadow] duration-300',
+        'scroll-mt-4 rounded-3xl border transition-[background-color,border-color,box-shadow] duration-300',
         open ? 'border-primary/30 bg-white shadow-glow' : 'border-transparent bg-mist hover:border-primary/25 hover:bg-white',
       )}
     >

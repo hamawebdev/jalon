@@ -47,8 +47,8 @@ function Pillar({
           {icon}
         </IconTile>
         <div className="flex flex-col gap-2.5">
-          <h3 className={cn('text-xl font-bold leading-snug', violet && 'text-white')}>{title}</h3>
-          <p className={cn('text-[15px] leading-relaxed', violet ? 'text-white/85' : 'text-slate')}>{body}</p>
+          <h3 className={cn('text-xl font-bold leading-snug break-words hyphens-auto', violet && 'text-white')}>{title}</h3>
+          <p className={cn('text-[15px] leading-relaxed break-words hyphens-auto', violet ? 'text-white/85' : 'text-slate')}>{body}</p>
         </div>
         {children}
       </Card>
@@ -62,7 +62,7 @@ function Stat({ children, tone = 'primary' }: { children: ReactNode; tone?: 'pri
     <p
       aria-hidden
       className={cn(
-        'mt-auto font-display text-4xl font-extrabold tracking-tight sm:text-5xl lg:text-[2.75rem]',
+        'mt-auto font-display text-4xl font-extrabold tracking-tight sm:text-5xl lg:text-4xl xl:text-[2.75rem]',
         tone === 'status' ? 'text-status' : 'text-primary',
       )}
     >

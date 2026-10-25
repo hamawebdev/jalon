@@ -6,7 +6,7 @@ import type { Dict } from '../types.ts'
 export const meta: Dict['meta'] = {
   siteName: 'AtlasProTVOfficial',
   ogImageAlt: 'Atlas Pro ONTV 2026 · Atlas Pro IPTV subscription from AtlasProTVOfficial, official authorised distributor',
-  organizationDescription: 'N°1 Official Authorised Atlas Pro Distributor in France & Europe.',
+  organizationDescription: 'No. 1 Official Authorised Atlas Pro Distributor in France & Europe.',
   productName: 'Atlas Pro ONTV Subscription',
   productDescription:
     '12-month Atlas Pro ONTV IPTV subscription for 1, 2 or 3 screens: live channels in Full HD, films and series on demand, replay, on Android, Smart TV, Fire TV Stick, iPhone and PC.',
@@ -18,7 +18,7 @@ export const meta: Dict['meta'] = {
       name: 'Home',
       title: 'Atlas Pro ONTV (2026) · Atlas Pro IPTV Subscription',
       description: (v) =>
-        `Discover Atlas Pro ONTV 2026, the Atlas Pro on TV IPTV: +${v.channels} channels in Full HD, +${v.films} films and series. Atlas Pro subscription activated on WhatsApp.`,
+        `Discover Atlas Pro ONTV 2026, the Atlas Pro on TV IPTV: +${v.channels} channels in Full HD, +${v.films} films and +${v.series} series. Atlas Pro subscription activated on WhatsApp.`,
     },
     boutique: {
       name: 'Shop',

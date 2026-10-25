@@ -93,7 +93,7 @@ export function LegalPage({
                 key={s.id}
                 id={s.id}
                 aria-labelledby={`${s.id}-title`}
-                className="scroll-mt-28 border-t border-line pt-9 pb-9 first:border-t-0 first:pt-0 last:pb-0"
+                className="scroll-mt-4 border-t border-line pt-9 pb-9 first:border-t-0 first:pt-0 last:pb-0"
               >
                 <h2 id={`${s.id}-title`} className="flex gap-3 text-xl font-bold tracking-tight sm:text-2xl">
                   <span className="tabular-nums text-primary">{i + 1}.</span>
@@ -127,7 +127,9 @@ export function LegalPage({
                   <p className="font-display text-lg font-bold text-ink">{t.help.title}</p>
                   <p className="mt-1 text-slate">{t.help.text}</p>
                 </div>
-                <WhatsAppButton message={contactMessage()}>{t.help.cta}</WhatsAppButton>
+                <WhatsAppButton message={contactMessage()} wrap>
+                  {t.help.cta}
+                </WhatsAppButton>
               </div>
             </footer>
           </article>

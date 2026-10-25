@@ -17,7 +17,7 @@ export const meta: Dict['meta'] = {
       name: 'Etusivu',
       title: 'Atlas Pro ONTV (2026) · IPTV Atlas Pro\u00a0-tilaus',
       description: (v) =>
-        `Tutustu Atlas Pro ONTV 2026:een, IPTV Atlas Pro on TV: +${v.channels} kanavaa Full HD:nä, +${v.films} elokuvaa ja sarjaa. Atlas Pro\u00a0-tilaus aktivoidaan WhatsAppissa.`,
+        `Tutustu Atlas Pro ONTV 2026:een, IPTV Atlas Pro on TV: +${v.channels} kanavaa Full HD:nä, +${v.films} elokuvaa ja +${v.series} sarjaa. Atlas Pro\u00a0-tilaus aktivoidaan WhatsAppissa.`,
     },
     boutique: {
       name: 'Kauppa',

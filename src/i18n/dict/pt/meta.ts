@@ -7,7 +7,7 @@ const pages: Dict['meta']['pages'] = {
     name: 'Início',
     title: 'Atlas Pro ONTV (2026) · Subscrição IPTV Atlas Pro',
     description: (v) =>
-      `Descubra o Atlas Pro ONTV 2026, o IPTV Atlas Pro on TV: +${v.channels} canais em Full HD, +${v.films} filmes e séries. Subscrição Atlas Pro ativada por WhatsApp.`,
+      `Descubra o Atlas Pro ONTV 2026, o IPTV Atlas Pro on TV: +${v.channels} canais em Full HD, +${v.films} filmes e +${v.series} séries. Subscrição Atlas Pro ativada por WhatsApp.`,
   },
   boutique: {
     name: 'Loja',

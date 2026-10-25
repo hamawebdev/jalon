@@ -18,7 +18,7 @@ export const meta: Dict['meta'] = {
       name: 'Startseite',
       title: 'Atlas Pro ONTV (2026) · Atlas Pro IPTV Abo',
       description: (v) =>
-        `Entdecken Sie Atlas Pro ONTV 2026, das IPTV Atlas Pro on TV: +${v.channels} Sender in Full HD, +${v.films} Filme & Serien. Ihr Atlas Pro Abo, aktiviert per WhatsApp.`,
+        `Entdecken Sie Atlas Pro ONTV 2026, das IPTV Atlas Pro on TV: +${v.channels} Sender in Full HD, +${v.films} Filme & +${v.series} Serien. Ihr Atlas Pro Abo, aktiviert per WhatsApp.`,
     },
     boutique: {
       name: 'Shop',
@@ -30,7 +30,7 @@ export const meta: Dict['meta'] = {
       name: 'Wiederverkäufer',
       title: 'Atlas Pro ONTV Wiederverkäufer werden · Offizielles Panel',
       description: (v) =>
-        `Atlas Pro Wiederverkäufer werden: Panel mit ${v.panels} Codes à 12 Monate, Sofortlieferung, gratis Schulung, 24/7-Support. Preise per WhatsApp.`,
+        `Atlas Pro Wiederverkäufer werden: Panel mit ${v.panels} Codes für je 12 Monate, Sofortlieferung, kostenlose Schulung, 24/7-Support. Preise per WhatsApp.`,
     },
     telecharger: {
       name: 'Download',
