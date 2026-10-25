@@ -14,7 +14,8 @@ export const pricing = {
   howTo: {
     badge: '🛒 Comment ça marche',
     title: 'Comment acheter votre abonnement Atlas Pro ONTV',
-    highlight: 'abonnement Atlas Pro ONTV',
+    // Shown in violet with the brand name (« abonnement Atlas Pro ONTV »); kept separate so the line can wrap.
+    highlight: 'abonnement',
     subtitle: (minutes: string) =>
       `De votre commande à votre premier programme en moins de ${minutes} minutes. Voici comment activer votre abonnement Atlas Pro en toute simplicité.`,
     step: (n: string) => `Étape ${n}`,
@@ -27,7 +28,7 @@ export const pricing = {
         time: '1 minute',
       },
       pay: {
-        title: 'Paiement 100% sécurisé',
+        title: (pct: string) => `Paiement ${pct} sécurisé`,
         text: 'Payez en toute tranquillité via PayPal ou Virement Bancaire (SEPA). Vos transactions sont cryptées de bout en bout pour votre sécurité.',
         time: '2 minutes',
       },
@@ -50,7 +51,8 @@ export const pricing = {
   plans: {
     badge: '🏷️ Tarifs & abonnements',
     title: 'Choisissez votre forfait Atlas Pro ONTV',
-    highlight: 'forfait Atlas Pro ONTV',
+    // Shown in violet with the brand name (« forfait Atlas Pro ONTV »).
+    highlight: 'forfait',
     subtitle:
       'Ne nous voilons pas la face : il existe des dizaines de services IPTV, mais rares sont ceux qui tiennent leurs promesses. Atlas Pro ONTV fait partie de ces exceptions. Testez sans risque — garantie satisfait ou remboursé si cela ne vous convient pas.',
     names: {
@@ -72,8 +74,8 @@ export const pricing = {
       quality: 'Qualité 4K (VOD), FHD, HD et SD',
       antiFreeze: 'Système Anti-Coupure (Anti-Freeze) inclus',
       replay: (days: string) => `Replay ${days} Jours + Guide TV Complet (EPG)`,
-      support: 'Support client 100% en Français',
-      supportVip: 'Support VIP 100% en Français',
+      support: (pct: string) => `Support client ${pct} en Français`,
+      supportVip: (pct: string) => `Support VIP ${pct} en Français`,
       links: 'Liens personnalisés au choix : Format Xtream Codes ou M3U',
       assistance: "Assistance à l'installation et support après-vente",
       warranty: 'Garantie et activation officielle',
@@ -85,9 +87,9 @@ export const pricing = {
   // Brief p. 22: « Barre de Confiance & Paiement », right under the 3 cards. PayPal and SEPA only: no card marks.
   trust: {
     label: 'Garanties et moyens de paiement',
-    secure: 'Paiement 100% sécurisé',
+    secure: (pct: string) => `Paiement ${pct} sécurisé`,
     instant: 'Activation instantanée',
-    protected: 'Accès 100% protégé & garanti',
+    protected: (pct: string) => `Accès ${pct} protégé & garanti`,
     payment: 'Paiement :',
     methods: {
       paypal: 'PayPal',

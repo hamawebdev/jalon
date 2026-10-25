@@ -11,14 +11,14 @@ import { planApps } from './plans'
 
 function useFeatures() {
   const t = useT()
-  const { num } = useFormat()
+  const { num, percent } = useFormat()
   const f = t.pricing.plans.features
   return (plan: Plan): string[] => [
     plan.screens === 1 ? f.codesOne(num(plan.months)) : f.codesMany(num(plan.screens)),
     f.quality,
     f.antiFreeze,
     f.replay(num(FACTS.counts.replayDays)),
-    plan.screens === 1 ? f.support : f.supportVip,
+    (plan.screens === 1 ? f.support : f.supportVip)(percent(100)),
     f.links,
     f.assistance,
     f.warranty,

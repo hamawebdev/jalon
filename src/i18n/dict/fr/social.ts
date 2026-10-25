@@ -123,6 +123,8 @@ export const social = {
     /** Screen-reader text of the 5 stars. */
     stars: 'Note : 5 sur 5',
     countries: { fr: 'France', be: 'Belgique', ch: 'Suisse', ca: 'Canada' },
+    /** Each reviewer's city, as written in this language. */
+    cities: { thomas: 'Lyon', sophie: 'Québec', karim: 'Namur', marc: 'Bordeaux', lucas: 'Toulouse', nadia: 'Genève' },
     /** The client line: « Thomas R. — Lyon, France · 2026 » (name in bold, then this). */
     from: (city: string, country: string, year: string) => `${city}, ${country} · ${year}`,
     screenshotAlt: (name: string) => `Capture WhatsApp de l'avis de ${name}`,

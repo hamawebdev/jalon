@@ -1,12 +1,15 @@
 // A client fact that is still missing. Review mode: a visible « À compléter » marker (with what is missing in its
 // title). Launch mode: nothing. Never write a placeholder value instead.
-import { useT } from '@/i18n/context'
+import { useLang, useT } from '@/i18n/context'
 import { LAUNCH } from '@/lib/mode'
 import { cn } from '@/lib/utils'
 
 export function Pending({ what, className }: { what: string; className?: string }) {
   const t = useT()
+  const lang = useLang()
   if (LAUNCH) return null
+  // `what` is written for the client, in French: it is spelled out on French pages only. Elsewhere the marker shows
+  // its translated label, and the detail stays in the tooltip.
   return (
     <span
       data-pending={what}
@@ -16,7 +19,7 @@ export function Pending({ what, className }: { what: string; className?: string 
         className,
       )}
     >
-      {t.chrome.pending} · {what}
+      {lang === 'fr' ? `${t.chrome.pending} · ${what}` : t.chrome.pending}
     </span>
   )
 }

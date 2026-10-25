@@ -18,3 +18,13 @@ export function formatPrice(lang: Lang, euros: number): string {
     maximumFractionDigits: whole ? 0 : 2,
   }).format(euros)
 }
+
+/** A percentage in the reader's language: fr « 99,99 % », en « 99.99% », de « 99,99 % », it « 99,99% ». */
+export function formatPercent(lang: Lang, value: number): string {
+  return new Intl.NumberFormat(LOCALES[lang].intl, { style: 'percent', maximumFractionDigits: 2 }).format(value / 100)
+}
+
+/** The colon after a label: French puts a no-break space before it (« Label : »), the other languages do not. */
+export function labelColon(lang: Lang): string {
+  return lang === 'fr' ? '\u00a0: ' : ': '
+}

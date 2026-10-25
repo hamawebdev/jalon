@@ -1,17 +1,18 @@
 // « Barre de Confiance & Paiement » (brief p. 22), right under the pricing cards. Payment marks: only the methods of
 // FACTS.payment (PayPal, SEPA bank transfer). The brief's strict rule: never a Visa / Mastercard / card mark. Owner: pricing.
 import { Lock, ShieldCheck, Zap } from 'lucide-react'
-import { useT } from '@/i18n/context'
+import { useFormat, useT } from '@/i18n/context'
 import { FACTS } from '@/lib/facts'
 import { cn } from '@/lib/utils'
 
 export function TrustBar({ className }: { className?: string }) {
   const t = useT()
   const tr = t.pricing.trust
+  const { percent } = useFormat()
   const items = [
-    { icon: Lock, text: tr.secure },
+    { icon: Lock, text: tr.secure(percent(100)) },
     { icon: Zap, text: tr.instant },
-    { icon: ShieldCheck, text: tr.protected },
+    { icon: ShieldCheck, text: tr.protected(percent(100)) },
   ]
   const methods = FACTS.payment.methods ?? []
 

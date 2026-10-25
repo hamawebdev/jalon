@@ -1,7 +1,7 @@
 // The current language and its dictionary. Every component reads copy with useT() and the language with useLang().
 import { createContext, use, useContext, type ReactNode } from 'react'
 import type { Dict } from './dict/types.ts'
-import { formatNumber, formatPrice } from './format.ts'
+import { formatNumber, formatPercent, formatPrice, labelColon } from './format.ts'
 import { loadDict, loadedDict } from './load.ts'
 import type { Lang } from './locales.ts'
 
@@ -34,5 +34,8 @@ export function useFormat() {
   return {
     num: (value: number, fractionDigits?: number) => formatNumber(lang, value, fractionDigits),
     price: (euros: number) => formatPrice(lang, euros),
+    percent: (value: number) => formatPercent(lang, value),
+    /** « Label : » in French, « Label: » elsewhere. */
+    colon: labelColon(lang),
   }
 }

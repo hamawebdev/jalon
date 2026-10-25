@@ -24,8 +24,8 @@ export default function Revendeur() {
 }
 
 function useUptime() {
-  const { num } = useFormat()
-  return `${num(FACTS.counts.uptime)} %`
+  const { percent } = useFormat()
+  return percent(FACTS.counts.uptime)
 }
 
 function Hero() {

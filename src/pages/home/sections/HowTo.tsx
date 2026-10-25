@@ -10,7 +10,7 @@ import { FACTS, PLANS } from '@/lib/facts'
 export function HowTo() {
   const t = useT()
   const h = t.pricing.howTo
-  const { num } = useFormat()
+  const { num, percent, colon } = useFormat()
 
   const steps = [
     {
@@ -23,7 +23,7 @@ export function HowTo() {
       ),
       time: h.steps.choose.time,
     },
-    { key: 'pay', icon: ShieldCheck, title: h.steps.pay.title, text: h.steps.pay.text, time: h.steps.pay.time },
+    { key: 'pay', icon: ShieldCheck, title: h.steps.pay.title(percent(100)), text: h.steps.pay.text, time: h.steps.pay.time },
     {
       key: 'receive',
       icon: MailCheck,
@@ -72,12 +72,18 @@ export function HowTo() {
                     <div className="flex min-w-0 flex-1 flex-col gap-2">
                       <div className="flex flex-wrap items-center justify-between gap-x-4 gap-y-2">
                         <h3 className="text-lg font-bold sm:text-xl">
-                          <span className="sr-only">{h.step(num(i + 1))} : </span>
+                          <span className="sr-only">
+                            {h.step(num(i + 1))}
+                            {colon}
+                          </span>
                           {title}
                         </h3>
                         <p className="inline-flex items-center gap-1.5 rounded-full bg-status-soft px-3 py-1 text-xs font-bold text-ink">
                           <Timer aria-hidden className="size-3.5 text-status" />
-                          <span className="sr-only">{h.timeLabel} : </span>
+                          <span className="sr-only">
+                            {h.timeLabel}
+                            {colon}
+                          </span>
                           {time}
                         </p>
                       </div>

@@ -67,11 +67,13 @@ export function Highlight({ text, extra = [], className }: { text: string; extra
   const pattern = new RegExp(`(${phrases.map((p) => p.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')).join('|')})`, 'gi')
   const parts = text.split(pattern)
   const lower = phrases.map((p) => p.toLowerCase())
+  // Brand names never break across lines; longer extra phrases may wrap (phones).
+  const brand = BRAND_PHRASES.map((p) => p.toLowerCase())
   return (
     <>
       {parts.map((part, i) =>
         lower.includes(part.toLowerCase()) ? (
-          <span key={i} className={cn('whitespace-nowrap text-primary', className)}>
+          <span key={i} className={cn(brand.includes(part.toLowerCase()) && 'whitespace-nowrap', 'text-primary', className)}>
             {part}
           </span>
         ) : (

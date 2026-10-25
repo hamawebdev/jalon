@@ -55,7 +55,7 @@ export function ReviewCard({ review, vars }: { review: Review; vars: ReviewVars 
   const t = useT().social.reviews
   const copy = t.items[review.id]
   const live = !!review.screenshot
-  const from = t.from(review.city, t.countries[review.country], String(review.year))
+  const from = t.from(t.cities[review.id], t.countries[review.country], String(review.year))
 
   return (
     <Card
