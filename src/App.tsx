@@ -1,51 +1,37 @@
-import { lazy, Suspense } from 'react'
+// Routes: every page in every language (src/i18n/routes.ts), each inside its language's layout.
+// A new page needs its id in PAGES and its slugs in SLUGS (src/i18n/routes.ts), its title and description in the
+// meta dictionary, and its component below.
+import { lazy, type ComponentType, type LazyExoticComponent } from 'react'
 import { Route, Routes } from 'react-router'
 import { SiteLayout } from '@/components/site/SiteLayout'
-import { RESELLER_ON } from '@/lib/site'
+import { DEFAULT_LANG, LANGS, LOCALES } from '@/i18n/locales'
+import { PAGES, pathFor, type PageId } from '@/i18n/routes'
 
-const Home = lazy(() => import('@/pages/Home'))
-const Pricing = lazy(() => import('@/pages/Pricing'))
-const Product = lazy(() => import('@/pages/Product'))
-const Services = lazy(() => import('@/pages/Services'))
-const Download = lazy(() => import('@/pages/Download'))
-const Help = lazy(() => import('@/pages/Help'))
-const Contact = lazy(() => import('@/pages/Contact'))
-const Checkout = lazy(() => import('@/pages/Checkout'))
-const Legal = lazy(() => import('@/pages/Legal'))
 const NotFound = lazy(() => import('@/pages/NotFound'))
 
-// The site's routes (structure INVENTORY §3.1). Links always end with a slash. Paths that are not listed here,
-// the template's earlier paths included (APPROVAL §2.1), render the 404 page. A new route also needs its title and
-// description in PAGE_META (src/lib/site.ts): the entry pages (scripts/static-head.mjs) and the sitemap
-// (scripts/sitemap.mjs) take their route list from there, and the entry pages read this file to know which page
-// chunk each route loads. Keep one <Route> per line, with its lazy component first in `element`.
-//
-// A page that waits for the owner's « yes » (APPROVAL §2c.4) keeps its route here and renders the 404 page until
-// then: /revendeur/ while RESELLER_ON is false (HIDDEN_ROUTES in src/lib/site.ts lists them for the entry pages,
-// the sitemap and the page meta).
-function App() {
-  return (
-    <Suspense fallback={null}>
-      <Routes>
-        <Route element={<SiteLayout />}>
-          <Route index element={<Home />} />
-          <Route path="abonnements" element={<Pricing />} />
-          <Route path="abonnements/:slug" element={<Product />} />
-          <Route path="revendeur" element={RESELLER_ON ? <Services /> : <NotFound />} />
-          <Route path="applications" element={<Download />} />
-          <Route path="aide" element={<Help />} />
-          <Route path="contact" element={<Contact />} />
-          <Route path="commande" element={<Checkout />} />
-          <Route path="mentions-legales" element={<Legal doc="mentions" />} />
-          <Route path="conditions-generales-de-vente" element={<Legal doc="cgv" />} />
-          <Route path="conditions-utilisation" element={<Legal doc="cgu" />} />
-          <Route path="politique-de-confidentialite" element={<Legal doc="privacy" />} />
-          <Route path="politique-de-remboursement" element={<Legal doc="refund" />} />
-          <Route path="*" element={<NotFound />} />
-        </Route>
-      </Routes>
-    </Suspense>
-  )
+export const PAGE_COMPONENTS: Record<PageId, LazyExoticComponent<ComponentType>> = {
+  home: lazy(() => import('@/pages/Home')),
+  boutique: lazy(() => import('@/pages/Boutique')),
+  revendeur: lazy(() => import('@/pages/Revendeur')),
+  telecharger: lazy(() => import('@/pages/Telecharger')),
+  contact: lazy(() => import('@/pages/Contact')),
+  mentions: lazy(() => import('@/pages/legal/Mentions')),
+  confidentialite: lazy(() => import('@/pages/legal/Confidentialite')),
+  conditions: lazy(() => import('@/pages/legal/Conditions')),
 }
 
-export default App
+export default function App() {
+  return (
+    <Routes>
+      {LANGS.map((lang) => (
+        <Route key={lang} element={<SiteLayout lang={lang} />}>
+          {PAGES.map((page) => {
+            const Page = PAGE_COMPONENTS[page]
+            return <Route key={page} path={pathFor(page, lang)} element={<Page />} />
+          })}
+          <Route path={lang === DEFAULT_LANG ? '*' : `${LOCALES[lang].prefix}/*`} element={<NotFound />} />
+        </Route>
+      ))}
+    </Routes>
+  )
+}
