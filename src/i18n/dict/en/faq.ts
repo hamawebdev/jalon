@@ -382,7 +382,7 @@ const items: FaqItem[] = [
     a: () => [
       {
         p: [
-          'To cast Atlas Pro ONTV from your smartphone or tablet to your TV, make sure both devices are connected to the same Wi-Fi network, then use the Cast / Screen mirroring feature (Chromecast or AirPlay). However, for optimal smoothness with no latency (Full HD H.265 for live TV, 4K for VOD), we recommend installing the app directly on your Smart TV, Fire TV Stick, Chromecast with Google TV or Android Box.',
+          'To cast Atlas Pro ONTV from your smartphone or tablet to your TV, make sure both devices are connected to the same Wi-Fi network, then use the Cast / Screen mirroring feature (Chromecast or AirPlay). However, for optimal smoothness in Full HD H.265 and 4K with no latency, we recommend installing the app directly on your Smart TV, Fire TV Stick, Chromecast with Google TV or Android Box.',
         ],
       },
     ],

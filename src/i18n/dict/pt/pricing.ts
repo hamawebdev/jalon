@@ -61,7 +61,7 @@ export const pricing: Dict['pricing'] = {
     features: {
       codesOne: (months: string) => `1 código de ativação oficial (Código Atlas Pro) para ${months} meses`,
       codesMany: (count: string) => `${count} códigos de ativação oficiais (Código Atlas Pro) para ${count} ecrãs`,
-      quality: 'Qualidade 4K (VOD), FHD, HD e SD',
+      quality: 'Qualidade 4K, FHD, HD e SD',
       antiFreeze: 'Sistema Anticortes (Anti-Freeze) incluído',
       replay: (days: string) => `Replay ${days} Dias + Guia TV Completo (EPG)`,
       support: (pct: string) => `Apoio ao cliente ${pct} em francês`,

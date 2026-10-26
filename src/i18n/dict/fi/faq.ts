@@ -384,7 +384,7 @@ const items: FaqItem[] = [
     a: () => [
       {
         p: [
-          'Kun haluat suoratoistaa Atlas Pro ONTV:n älypuhelimesta tai tabletista televisioon, varmista, että molemmat laitteet ovat samassa Wi-Fi-verkossa, ja käytä sitten suoratoisto- / näytön jakotoimintoa (Chromecast tai AirPlay). Parhaan sujuvuuden ilman viivettä (suorat lähetykset Full HD H.265\u00a0-laadulla, VOD 4K-laadulla) saat kuitenkin asentamalla sovelluksen suoraan Smart TV:hen, Fire TV Stickiin, Chromecast with Google TV:hen tai Android-boksiin.',
+          'Kun haluat suoratoistaa Atlas Pro ONTV:n älypuhelimesta tai tabletista televisioon, varmista, että molemmat laitteet ovat samassa Wi-Fi-verkossa, ja käytä sitten suoratoisto- / näytön jakotoimintoa (Chromecast tai AirPlay). Parhaan sujuvuuden Full HD H.265\u00a0- ja 4K-laadulla ilman viivettä saat kuitenkin asentamalla sovelluksen suoraan Smart TV:hen, Fire TV Stickiin, Chromecast with Google TV:hen tai Android-boksiin.',
         ],
       },
     ],

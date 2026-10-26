@@ -16,7 +16,7 @@ export const install: InstallCopy = {
 
   selector: {
     title: 'Wählen Sie Ihr Gerät',
-    hint: 'Die Schritt-für-Schritt-Anleitung für Ihr Gerät erscheint direkt darunter.',
+    hint: 'Die Schritt-für-Schritt-Anleitung für Ihr Gerät erscheint weiter unten, nach den offiziellen Apps.',
     listLabel: 'Geräte',
     change: 'Gerät wechseln',
     current: 'Ihr Gerät',
@@ -45,7 +45,7 @@ export const install: InstallCopy = {
           tone: 'info',
           title: '💡 WICHTIGER HINWEIS (SAMSUNG & LG TV vs. ANDROID TV)',
           body: [
-            'Die native App **Atlas Pro ONTV** ist in den offiziellen Stores von Samsung (Tizen) und LG (WebOS) nicht direkt verfügbar. Die kompatiblen Hochleistungs-Player für diese Fernseher (**IBO Player / IBO Player Pro**, **IBO Player Smarter**, **Hot Player**, **Bob Player**) sind **unabhängige, kostenpflichtige Apps (~{price} / Jahr nach {trial} Tagen kostenloser Testphase)**. Sie bieten einen sofort geladenen EPG, einwandfreie Stabilität in Full HD (4K bei VOD) und setzen Filme und Serien genau an der Sekunde fort, an der Sie aufgehört haben. Sie können sie zwar selbst aktivieren, **wir empfehlen Ihnen jedoch dringend, unserem Technikteam die vollständige Aktivierung der App UND gleichzeitig das Einspielen Ihres Atlas Pro Abos zu überlassen**: Senden Sie uns einfach Ihre **MAC Address** und Ihren **Device Key** per {wa} – unser Team kümmert sich um alles, von A bis Z!',
+            'Die native App **Atlas Pro ONTV** ist in den offiziellen Stores von Samsung (Tizen) und LG (WebOS) nicht direkt verfügbar. Die kompatiblen Hochleistungs-Player für diese Fernseher (**IBO Player / IBO Player Pro**, **IBO Player Smarter**, **Hot Player**, **Bob Player**) sind **unabhängige, kostenpflichtige Apps (~{price} / Jahr nach {trial} Tagen kostenloser Testphase)**. Sie bieten einen sofort geladenen EPG, einwandfreie Stabilität in 4K/FHD und setzen Filme und Serien genau an der Sekunde fort, an der Sie aufgehört haben. Sie können sie zwar selbst aktivieren, **wir empfehlen Ihnen jedoch dringend, unserem Technikteam die vollständige Aktivierung der App UND gleichzeitig das Einspielen Ihres Atlas Pro Abos zu überlassen**: Senden Sie uns einfach Ihre **MAC Address** und Ihren **Device Key** per {wa} – unser Team kümmert sich um alles, von A bis Z!',
             '(Hinweis: Für Sony-, TCL- und Xiaomi-Fernseher mit Android TV / Google TV ist die offizielle Atlas Pro App über Downloader zu 100 % kostenlos.)',
           ],
         },
@@ -54,7 +54,7 @@ export const install: InstallCopy = {
           tone: 'warn',
           title: '⚠️ Warnung zu Smarters Pro auf Smart TVs',
           body: [
-            'Wir raten von der alten Version von IPTV Smarters Pro auf Samsung und LG TVs ab (sie verursacht Aussetzer, Hänger und Autorisierungsfehler, die nichts mit unserem Server zu tun haben). **Warum sollten Sie die kostenpflichtigen Player (IBO Player, IBO Player Smarter, Bob Player, Hot Player) bevorzugen?** Sie bieten **{trial} Tage kostenlose Testphase**, einwandfreie Stabilität in Full HD (4K bei VOD), einen sofort geladenen EPG und **setzen Ihre Filme und Serien genau an der Sekunde fort, an der Sie aufgehört haben**.',
+            'Wir raten von der alten Version von IPTV Smarters Pro auf Samsung und LG TVs ab (sie verursacht Aussetzer, Hänger und Autorisierungsfehler, die nichts mit unserem Server zu tun haben). **Warum sollten Sie die kostenpflichtigen Player (IBO Player, IBO Player Smarter, Bob Player, Hot Player) bevorzugen?** Sie bieten **{trial} Tage kostenlose Testphase**, einwandfreie Stabilität in 4K/FHD, einen sofort geladenen EPG und **setzen Ihre Filme und Serien genau an der Sekunde fort, an der Sie aufgehört haben**.',
           ],
         },
         {
@@ -135,7 +135,7 @@ export const install: InstallCopy = {
               text: 'Erlauben Sie unbekannte Quellen für **Downloader** unter Einstellungen > Sicherheit & Einschränkungen (tippen Sie vorher unter Info 7-mal auf Build-Nummer, falls der Entwicklermodus ausgeblendet ist).',
             },
             {
-              text: 'Öffnen Sie **Downloader** und geben Sie den Code der gewünschten kostenlosen App ein (**{app:ontv}** per Code Active, **{app:max}** per Username/Password, **{app:ibo}** oder **{app:x9}** per Username/Password) – oder tippen Sie auf dem Smartphone/Tablet direkt auf unsere [APK-Download-Buttons weiter unten](#apps).',
+              text: 'Öffnen Sie **Downloader** und geben Sie den Code der gewünschten kostenlosen App ein (**{app:ontv}** per Code Active, **{app:max}** per Username/Password, **{app:ibo}** oder **{app:x9}** per Username/Password) – oder tippen Sie auf dem Smartphone/Tablet direkt auf unsere [APK-Download-Buttons weiter oben](#apps).',
               appCodes: true,
             },
           ],

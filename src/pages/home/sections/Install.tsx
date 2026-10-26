@@ -1,4 +1,4 @@
-// Home section: installation hub: 9-device selector, app matrix (#applications), warnings, 4 technical questions, help banner. Owner: install. Anchor: HOME_ANCHORS.install
+// Home section: installation hub in the brief's order: 9-device selector, app matrix (#applications), device guides, 4 technical questions, help banner. Owner: install. Anchor: HOME_ANCHORS.install
 import { Headset, MonitorSmartphone, Timer, type LucideIcon } from 'lucide-react'
 import { Reveal, Section, SectionHeader } from '@/components/kit'
 import { useFormat, useT } from '@/i18n/context'
@@ -36,8 +36,7 @@ export function Install() {
           ))}
         </ul>
       </Reveal>
-      <DeviceHub />
-      <AppMatrix />
+      <DeviceHub between={<AppMatrix />} />
       <TechQuestions />
       <HelpBanner />
     </Section>

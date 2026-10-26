@@ -471,7 +471,7 @@ const items: FaqItem[] = [
     a: () => [
       {
         p: [
-          "Pour savoir comment caster Atlas Pro ONTV depuis votre smartphone ou tablette vers votre téléviseur, assurez-vous que les deux appareils sont connectés au même réseau Wi-Fi, puis utilisez la fonction Caster / Diffusion d'écran (Chromecast ou AirPlay). Toutefois, pour une fluidité optimale sans latence (Full HD H.265 en direct, 4K sur la VOD), nous vous recommandons d'installer directement l'application sur votre Smart TV, Fire TV Stick, Chromecast avec Google TV ou Box Android.",
+          "Pour savoir comment caster Atlas Pro ONTV depuis votre smartphone ou tablette vers votre téléviseur, assurez-vous que les deux appareils sont connectés au même réseau Wi-Fi, puis utilisez la fonction Caster / Diffusion d'écran (Chromecast ou AirPlay). Toutefois, pour une fluidité optimale en Full HD H.265 et 4K sans latence, nous vous recommandons d'installer directement l'application sur votre Smart TV, Fire TV Stick, Chromecast avec Google TV ou Box Android.",
         ],
       },
     ],

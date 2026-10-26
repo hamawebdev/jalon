@@ -16,7 +16,7 @@ export const install: InstallCopy = {
 
   selector: {
     title: 'Scegli il tuo dispositivo',
-    hint: 'La guida passo dopo passo per il tuo dispositivo appare qui sotto.',
+    hint: 'La guida passo dopo passo per il tuo dispositivo appare più in basso, dopo le applicazioni ufficiali.',
     listLabel: 'Dispositivi',
     change: 'Cambia dispositivo',
     current: 'Il tuo dispositivo',
@@ -45,7 +45,7 @@ export const install: InstallCopy = {
           tone: 'info',
           title: '💡 NOTA IMPORTANTE (TV SAMSUNG & LG vs ANDROID TV)',
           body: [
-            "L'applicazione nativa **Atlas Pro ONTV** non è disponibile direttamente negli store ufficiali Samsung (Tizen) e LG (WebOS). I player ad alte prestazioni compatibili con questi televisori (**IBO Player / IBO Player Pro**, **IBO Player Smarter**, **Hot Player**, **Bob Player**) sono **applicazioni a pagamento indipendenti (circa ~{price} / anno dopo {trial} giorni di prova gratuita)**. Garantiscono una guida EPG istantanea, una stabilità Full HD impeccabile (4K sulla VOD) e la ripresa della riproduzione di film e serie esattamente dal secondo in cui ti eri fermato. Anche se puoi attivarli da solo, **ti consigliamo vivamente di lasciare al nostro team tecnico l'attivazione completa dell'applicazione E il caricamento del tuo abbonamento Atlas Pro, in un'unica operazione**: inviaci semplicemente il tuo **MAC Address** e il tuo **Device Key** su {wa}, il nostro team si occupa di tutto dalla A alla Z!",
+            "L'applicazione nativa **Atlas Pro ONTV** non è disponibile direttamente negli store ufficiali Samsung (Tizen) e LG (WebOS). I player ad alte prestazioni compatibili con questi televisori (**IBO Player / IBO Player Pro**, **IBO Player Smarter**, **Hot Player**, **Bob Player**) sono **applicazioni a pagamento indipendenti (circa ~{price} / anno dopo {trial} giorni di prova gratuita)**. Garantiscono una guida EPG istantanea, una stabilità 4K/FHD impeccabile e la ripresa della riproduzione di film e serie esattamente dal secondo in cui ti eri fermato. Anche se puoi attivarli da solo, **ti consigliamo vivamente di lasciare al nostro team tecnico l'attivazione completa dell'applicazione E il caricamento del tuo abbonamento Atlas Pro, in un'unica operazione**: inviaci semplicemente il tuo **MAC Address** e il tuo **Device Key** su {wa}, il nostro team si occupa di tutto dalla A alla Z!",
             "(Nota: per le TV Sony, TCL e Xiaomi con Android TV / Google TV, l'applicazione ufficiale Atlas Pro è gratuita al 100% tramite Downloader).",
           ],
         },
@@ -54,7 +54,7 @@ export const install: InstallCopy = {
           tone: 'warn',
           title: '⚠️ Avvertenza su Smarters Pro per Smart TV',
           body: [
-            "Sconsigliamo l'uso della vecchia versione di IPTV Smarters Pro sulle TV Samsung e LG (provoca interruzioni, blocchi ed errori di autorizzazione che non dipendono dal nostro server). **Perché preferire i player a pagamento (IBO Player, IBO Player Smarter, Bob Player, Hot Player)?** Offrono **{trial} giorni di prova gratuita**, una stabilità Full HD impeccabile (4K sulla VOD), il caricamento istantaneo della guida EPG e la **ripresa della riproduzione di film e serie esattamente dal secondo in cui ti eri fermato**.",
+            "Sconsigliamo l'uso della vecchia versione di IPTV Smarters Pro sulle TV Samsung e LG (provoca interruzioni, blocchi ed errori di autorizzazione che non dipendono dal nostro server). **Perché preferire i player a pagamento (IBO Player, IBO Player Smarter, Bob Player, Hot Player)?** Offrono **{trial} giorni di prova gratuita**, una stabilità 4K/FHD impeccabile, il caricamento istantaneo della guida EPG e la **ripresa della riproduzione di film e serie esattamente dal secondo in cui ti eri fermato**.",
           ],
         },
         {
@@ -135,7 +135,7 @@ export const install: InstallCopy = {
               text: 'Autorizza le origini sconosciute per **Downloader** in Impostazioni > Sicurezza e limitazioni (dopo aver cliccato 7 volte su Build in Informazioni, se la modalità sviluppatore è nascosta).',
             },
             {
-              text: "Apri **Downloader**, digita il codice dell'applicazione gratuita che preferisci (**{app:ontv}** con Code Active, **{app:max}** con Username/Password, **{app:ibo}**, oppure **{app:x9}** con Username/Password) o clicca direttamente sui nostri [pulsanti di download APK qui sotto](#apps) da smartphone/tablet.",
+              text: "Apri **Downloader**, digita il codice dell'applicazione gratuita che preferisci (**{app:ontv}** con Code Active, **{app:max}** con Username/Password, **{app:ibo}**, oppure **{app:x9}** con Username/Password) o clicca direttamente sui nostri [pulsanti di download APK qui sopra](#apps) da smartphone/tablet.",
               appCodes: true,
             },
           ],

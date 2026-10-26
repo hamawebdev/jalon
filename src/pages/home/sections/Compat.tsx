@@ -8,6 +8,7 @@ import { Card, IconTile, Reveal, Section, SectionHeader } from '@/components/kit
 import { useLang, useT } from '@/i18n/context'
 import { HOME_ANCHORS, homeAnchor } from '@/i18n/routes'
 import type { AppId } from '@/lib/facts'
+import { FACTS } from '@/lib/facts'
 import { appLabel } from '../social/apps'
 import { AndroidIcon } from '../social/icons'
 
@@ -55,7 +56,14 @@ function DeviceCard({
 
 export function Compat() {
   const t = useT().social.compat
-  const androidApps = ANDROID_APPS.map((id, i) => appLabel(id, i > 0)).join(', ')
+  // The brief lists every official ONTV version: « Atlas Pro ONTV 4.0, on tv 4.0.1, on tv 4.0.2, … ».
+  const ontv = FACTS.apps.ontv
+  const ontvVersions = ontv.version
+    ? [ontv.version.split('.').slice(0, 2).join('.'), ...(ontv.compatibleVersions ?? []), ontv.version]
+    : []
+  const androidApps = ANDROID_APPS.map((id, i) =>
+    id === 'ontv' && ontvVersions.length ? `${ontv.name} ${ontvVersions.join(', ')}` : appLabel(id, i > 0),
+  ).join(', ')
   return (
     <Section id={HOME_ANCHORS.compat} bg="mist">
       <SectionHeader title={t.title} highlight={t.highlight} subtitle={t.subtitle} />

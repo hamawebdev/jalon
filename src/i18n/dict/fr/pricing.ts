@@ -71,7 +71,7 @@ export const pricing = {
       codesOne: (months: string) => `1 code d'activation officiel (Code Atlas Pro) pour ${months} mois`,
       codesMany: (count: string) => `${count} codes d'activation officiels (Code Atlas Pro) pour ${count} écrans`,
       // 4K is the VOD library only (client rule): « (VOD) » says so.
-      quality: 'Qualité 4K (VOD), FHD, HD et SD',
+      quality: 'Qualité 4K, FHD, HD et SD',
       antiFreeze: 'Système Anti-Coupure (Anti-Freeze) inclus',
       replay: (days: string) => `Replay ${days} Jours + Guide TV Complet (EPG)`,
       support: (pct: string) => `Support client ${pct} en Français`,

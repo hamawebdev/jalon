@@ -1,6 +1,6 @@
 // The 9-device selector (ARIA tabs) and the device guides. Every guide is rendered; the inactive ones carry
 // `hidden`, so all of their text is in the prerendered HTML. Windows, Mac and Linux share the computer guide.
-import { useRef, useState, type KeyboardEvent } from 'react'
+import { useRef, useState, type KeyboardEvent, type ReactNode } from 'react'
 import {
   Apple,
   Bot,
@@ -57,7 +57,11 @@ function Block({ block, os }: { block: GuideBlock; os: DesktopOs | null }) {
   }
 }
 
-export function DeviceHub() {
+/**
+ * The device selector, then `between` (the app matrix: the brief's order is selector, apps, guides), then the guide of
+ * the chosen device. Choosing a device scrolls to its guide.
+ */
+export function DeviceHub({ between }: { between?: ReactNode }) {
   const t = useT().install
   const [active, setActive] = useState<DeviceId>('smartTv')
   const tabs = useRef<Partial<Record<DeviceId, HTMLButtonElement | null>>>({})
@@ -157,6 +161,8 @@ export function DeviceHub() {
           })}
         </div>
       </div>
+
+      {between}
 
       {GUIDES.map((guide) => {
         const copy = t.guides[guide]

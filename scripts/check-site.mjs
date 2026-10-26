@@ -88,7 +88,7 @@ function textNodes(html) {
 
 // Sentences that tie 4K / UHD to live TV or sport, in any of the seven languages.
 const FOURK = /\b4\s?K\b|ultra\s?HD|\bUHD\b/i
-const LIVE = /\b(direct|en direct|live|sport|sports|sportifs?|match|matchs|matches|chaînes?|channels?|kanäle|kanal|canales?|canais|canali|kanavat?|kanavia|deportes?|desporto|esporte|sportivi|urheilu\w*|spiele|partidos?|jogos|partite|ottelu\w*|tv en vivo|in diretta|suora\w*|livestream)/i
+const LIVE = /\b(direct|en direct|live|sport|sports|sportifs?|match|matchs|matches|chaînes?|channels?|kanäle|kanal|canales?|canais|canali|kanavat?|kanavia|deportes?|desporto|esporte|sportivi|urheilu\w*|spiele|partidos?|jogos|partite|ottelu\w*|tv en vivo|in diretta|suor\w* lähetyk\w*|suorana|livestream)\b/i
 const VOD_OK = /\bVOD\b|vidéo à la demande|video on demand|films?|séries|series|filme|serien|películas|filmes|séries|film|serie|elokuv\w*|sarj\w*/i
 
 const FRENCH_WORDS = /\b(le|la|les|des|du|vous|votre|vos|nous|notre|nos|pour|avec|sur|dans|est|une|un|et|en|au|aux|chaînes|abonnement|appareil|téléchargez|installez|cliquez|à|où|ou|très|plus|sans|selon|chaque|mois|écran|écrans)\b/gi

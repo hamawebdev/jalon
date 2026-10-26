@@ -387,7 +387,7 @@ const items: FaqItem[] = [
     a: () => [
       {
         p: [
-          'Para enviar Atlas Pro ONTV desde tu móvil o tableta a tu televisor, asegúrate de que ambos dispositivos están conectados a la misma red wifi y usa la función Enviar / Duplicar pantalla (Chromecast o AirPlay). Aun así, para disfrutar de una fluidez óptima sin latencia (Full HD H.265 en directo, 4K en la VOD), te recomendamos instalar la aplicación directamente en tu Smart TV, Fire TV Stick, Chromecast con Google TV o Box Android.',
+          'Para enviar Atlas Pro ONTV desde tu móvil o tableta a tu televisor, asegúrate de que ambos dispositivos están conectados a la misma red wifi y usa la función Enviar / Duplicar pantalla (Chromecast o AirPlay). Aun así, para disfrutar de una fluidez óptima en Full HD H.265 y 4K sin latencia, te recomendamos instalar la aplicación directamente en tu Smart TV, Fire TV Stick, Chromecast con Google TV o Box Android.',
         ],
       },
     ],

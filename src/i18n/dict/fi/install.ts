@@ -16,7 +16,7 @@ export const install: InstallCopy = {
 
   selector: {
     title: 'Valitse laitteesi',
-    hint: 'Laitteesi vaiheittainen opas näkyy heti alla.',
+    hint: 'Laitteesi vaiheittainen opas näkyy alempana, virallisten sovellusten jälkeen.',
     listLabel: 'Laitteet',
     change: 'Vaihda laitetta',
     current: 'Laitteesi',
@@ -45,7 +45,7 @@ export const install: InstallCopy = {
           tone: 'info',
           title: '💡 TÄRKEÄ HUOMAUTUS (SAMSUNG- & LG-TV vs. ANDROID TV)',
           body: [
-            'Natiivia **Atlas Pro ONTV**\u00a0-sovellusta ei ole suoraan saatavilla Samsungin (Tizen) ja LG:n (WebOS) virallisissa sovelluskaupoissa. Näille televisioille sopivat tehokkaat soittimet (**IBO Player / IBO Player Pro**, **IBO Player Smarter**, **Hot Player**, **Bob Player**) ovat **itsenäisiä maksullisia sovelluksia (noin ~{price} / vuosi {trial} päivän ilmaisen kokeilun jälkeen)**. Ne takaavat välittömän EPG-ohjelmaoppaan, moitteettoman Full HD\u00a0-vakauden (VOD 4K-laadulla) ja elokuvien ja sarjojen jatkamisen täsmälleen siitä sekunnista, mihin jäit. Voit aktivoida ne itsekin, mutta **suosittelemme lämpimästi, että annat teknisen tiimimme hoitaa sekä sovelluksen täydellisen aktivoinnin ETTÄ Atlas Pro\u00a0-tilauksesi lisäämisen samalla kertaa**: lähetä meille vain **MAC Address** ja **Device Key** – {wa} – niin tiimimme hoitaa kaiken alusta loppuun!',
+            'Natiivia **Atlas Pro ONTV**\u00a0-sovellusta ei ole suoraan saatavilla Samsungin (Tizen) ja LG:n (WebOS) virallisissa sovelluskaupoissa. Näille televisioille sopivat tehokkaat soittimet (**IBO Player / IBO Player Pro**, **IBO Player Smarter**, **Hot Player**, **Bob Player**) ovat **itsenäisiä maksullisia sovelluksia (noin ~{price} / vuosi {trial} päivän ilmaisen kokeilun jälkeen)**. Ne takaavat välittömän EPG-ohjelmaoppaan, moitteettoman 4K/FHD-vakauden ja elokuvien ja sarjojen jatkamisen täsmälleen siitä sekunnista, mihin jäit. Voit aktivoida ne itsekin, mutta **suosittelemme lämpimästi, että annat teknisen tiimimme hoitaa sekä sovelluksen täydellisen aktivoinnin ETTÄ Atlas Pro\u00a0-tilauksesi lisäämisen samalla kertaa**: lähetä meille vain **MAC Address** ja **Device Key** – {wa} – niin tiimimme hoitaa kaiken alusta loppuun!',
             '(Huom.: Android TV:tä / Google TV:tä käyttävissä Sony-, TCL- ja Xiaomi-televisioissa virallinen Atlas Pro\u00a0-sovellus on 100 % ilmainen Downloaderin kautta.)',
           ],
         },
@@ -54,7 +54,7 @@ export const install: InstallCopy = {
           tone: 'warn',
           title: '⚠️ Varoitus: Smarters Pro Smart TV:ssä',
           body: [
-            'Emme suosittele vanhan IPTV Smarters Pro\u00a0-version käyttöä Samsung- ja LG-televisioissa (se aiheuttaa palvelimestamme riippumattomia katkoja, jumiutumisia ja valtuutusvirheitä). **Miksi suosia maksullisia soittimia (IBO Player, IBO Player Smarter, Bob Player, Hot Player)?** Niissä on **{trial} päivän ilmainen kokeilu**, moitteeton Full HD\u00a0-vakaus (VOD 4K-laadulla), välittömästi latautuva EPG-ohjelmaopas ja **elokuvien ja sarjojen jatkaminen täsmälleen siitä sekunnista, mihin jäit**.',
+            'Emme suosittele vanhan IPTV Smarters Pro\u00a0-version käyttöä Samsung- ja LG-televisioissa (se aiheuttaa palvelimestamme riippumattomia katkoja, jumiutumisia ja valtuutusvirheitä). **Miksi suosia maksullisia soittimia (IBO Player, IBO Player Smarter, Bob Player, Hot Player)?** Niissä on **{trial} päivän ilmainen kokeilu**, moitteeton 4K/FHD-vakaus, välittömästi latautuva EPG-ohjelmaopas ja **elokuvien ja sarjojen jatkaminen täsmälleen siitä sekunnista, mihin jäit**.',
           ],
         },
         {
@@ -135,7 +135,7 @@ export const install: InstallCopy = {
               text: 'Salli tuntemattomat lähteet **Downloaderille** kohdassa Asetukset > Suojaus ja rajoitukset (jos kehittäjätila on piilossa, napsauta ensin 7 kertaa Koontiversio-kohtaa Tietoja-valikossa).',
             },
             {
-              text: 'Avaa **Downloader** ja kirjoita haluamasi ilmaisen sovelluksen koodi (**{app:ontv}** Code Activella, **{app:max}** käyttäjätunnuksella ja salasanalla (Username/Password), **{app:ibo}** tai **{app:x9}** käyttäjätunnuksella ja salasanalla) – tai napauta puhelimella/tabletilla suoraan [alla olevia APK-latauspainikkeitamme](#apps).',
+              text: 'Avaa **Downloader** ja kirjoita haluamasi ilmaisen sovelluksen koodi (**{app:ontv}** Code Activella, **{app:max}** käyttäjätunnuksella ja salasanalla (Username/Password), **{app:ibo}** tai **{app:x9}** käyttäjätunnuksella ja salasanalla) – tai napauta puhelimella/tabletilla suoraan [yllä olevia APK-latauspainikkeitamme](#apps).',
               appCodes: true,
             },
           ],

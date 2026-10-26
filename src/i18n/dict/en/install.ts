@@ -15,7 +15,7 @@ export const install: InstallCopy = {
 
   selector: {
     title: 'Choose your device',
-    hint: 'The step-by-step guide for your device appears just below.',
+    hint: 'The step-by-step guide for your device appears further down, after the official apps.',
     listLabel: 'Devices',
     change: 'Change device',
     current: 'Your device',
@@ -44,7 +44,7 @@ export const install: InstallCopy = {
           tone: 'info',
           title: '💡 IMPORTANT NOTE (SAMSUNG & LG TV vs ANDROID TV)',
           body: [
-            "The native **Atlas Pro ONTV** app is not directly available on the official Samsung (Tizen) and LG (WebOS) stores. The high-performance players compatible with these TVs (**IBO Player / IBO Player Pro**, **IBO Player Smarter**, **Hot Player**, **Bob Player**) are **independent paid apps (around ~{price} / year after a {trial}-day free trial)**. They guarantee an instant EPG guide, flawless Full HD stability (4K on VOD) and resume films and series at the exact second you stopped. Although you can activate them yourself, **we strongly recommend letting our technical team handle the full activation of the app AND load your Atlas Pro subscription at the same time**: simply send us your **MAC Address** and **Device Key** on {wa}, and our team takes care of everything from A to Z!",
+            "The native **Atlas Pro ONTV** app is not directly available on the official Samsung (Tizen) and LG (WebOS) stores. The high-performance players compatible with these TVs (**IBO Player / IBO Player Pro**, **IBO Player Smarter**, **Hot Player**, **Bob Player**) are **independent paid apps (around ~{price} / year after a {trial}-day free trial)**. They guarantee an instant EPG guide, flawless 4K/FHD stability and resume films and series at the exact second you stopped. Although you can activate them yourself, **we strongly recommend letting our technical team handle the full activation of the app AND load your Atlas Pro subscription at the same time**: simply send us your **MAC Address** and **Device Key** on {wa}, and our team takes care of everything from A to Z!",
             '(Note: For Sony, TCL and Xiaomi TVs running Android TV / Google TV, the official Atlas Pro app is 100% free via Downloader.)',
           ],
         },
@@ -53,7 +53,7 @@ export const install: InstallCopy = {
           tone: 'warn',
           title: '⚠️ Smarters Pro Warning on Smart TV',
           body: [
-            "We advise against using the old IPTV Smarters Pro version on Samsung and LG TVs (it causes dropouts, freezes and authorisation errors unrelated to our server). **Why choose the paid players (IBO Player, IBO Player Smarter, Bob Player, Hot Player)?** They offer a **{trial}-day free trial**, flawless Full HD stability (4K on VOD), instant EPG guide loading and **resume your films and series at the exact second you stopped**.",
+            "We advise against using the old IPTV Smarters Pro version on Samsung and LG TVs (it causes dropouts, freezes and authorisation errors unrelated to our server). **Why choose the paid players (IBO Player, IBO Player Smarter, Bob Player, Hot Player)?** They offer a **{trial}-day free trial**, flawless 4K/FHD stability, instant EPG guide loading and **resume your films and series at the exact second you stopped**.",
           ],
         },
         {
@@ -134,7 +134,7 @@ export const install: InstallCopy = {
               text: 'Allow unknown sources for **Downloader** in Settings > Security & restrictions (after clicking Build 7 times in About if developer mode is hidden).',
             },
             {
-              text: 'Open **Downloader**, type the code of the free app you want (**{app:ontv}** with Code Active, **{app:max}** with Username/Password, **{app:ibo}**, or **{app:x9}** with Username/Password) or tap our [APK download buttons below](#apps) directly on your smartphone/tablet.',
+              text: 'Open **Downloader**, type the code of the free app you want (**{app:ontv}** with Code Active, **{app:max}** with Username/Password, **{app:ibo}**, or **{app:x9}** with Username/Password) or tap our [APK download buttons above](#apps) directly on your smartphone/tablet.',
               appCodes: true,
             },
           ],

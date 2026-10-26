@@ -20,7 +20,8 @@ export function useStoryNumbers() {
       : null
   // « Atlas Pro ONTV 4.0.2 · Max v7 · IBO v4.3 », leaving out an app whose version is missing.
   const suite = [
-    ontv.version && t.apps.ontv(ontv.version),
+    // The brief: « Suite Officielle : atlas pro ontv 4.0, ONTV 4.0.2 · Max v7 · IBO v4.3 ».
+    ontv.version && `${t.apps.ontv(ontv.version.split('.').slice(0, 2).join('.'))}, ONTV ${ontv.version}`,
     max.version && t.apps.max(max.version),
     ibo.version && t.apps.ibo(ibo.version),
   ]

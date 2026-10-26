@@ -61,7 +61,7 @@ export const pricing: Dict['pricing'] = {
     features: {
       codesOne: (months: string) => `1 virallinen aktivointikoodi (Code Atlas Pro) ${months} kuukaudeksi`,
       codesMany: (count: string) => `${count} virallista aktivointikoodia (Code Atlas Pro) ${count} näytölle`,
-      quality: '4K-laatu (VOD), FHD, HD ja SD',
+      quality: '4K-, FHD-, HD- ja SD-laatu',
       antiFreeze: 'Katkoja estävä järjestelmä (Anti-Freeze) sisältyy',
       replay: (days: string) => `Jälkikatselu ${days} päivää + kattava ohjelmaopas (EPG)`,
       support: (pct: string) => `${pct} ranskankielinen asiakastuki`,

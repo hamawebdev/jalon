@@ -386,7 +386,7 @@ const items: FaqItem[] = [
     a: () => [
       {
         p: [
-          "Per trasmettere Atlas Pro ONTV dal tuo smartphone o tablet al televisore, assicurati che i due dispositivi siano connessi alla stessa rete Wi-Fi, poi usa la funzione Trasmetti / Duplicazione schermo (Chromecast o AirPlay). Tuttavia, per una fluidità ottimale senza latenza (Full HD H.265 in diretta, 4K sulla VOD), ti consigliamo di installare l'applicazione direttamente sulla tua Smart TV, Fire TV Stick, Chromecast con Google TV o Box Android.",
+          "Per trasmettere Atlas Pro ONTV dal tuo smartphone o tablet al televisore, assicurati che i due dispositivi siano connessi alla stessa rete Wi-Fi, poi usa la funzione Trasmetti / Duplicazione schermo (Chromecast o AirPlay). Tuttavia, per una fluidità ottimale in Full HD H.265 e 4K senza latenza, ti consigliamo di installare l'applicazione direttamente sulla tua Smart TV, Fire TV Stick, Chromecast con Google TV o Box Android.",
         ],
       },
     ],
